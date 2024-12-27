@@ -41,13 +41,16 @@ const Besoins = () => {
     };
 
     try {
-      const response = await fetch("http://192.168.1.87:5050/farmneeds", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const response = await fetch(
+        "https://farmapi-jimn.onrender.com/farmneeds",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
       if (response.ok) {
         alert("La fiche a bien ete envoyee!");
         setFormData({

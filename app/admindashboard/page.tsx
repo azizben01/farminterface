@@ -21,7 +21,7 @@ const AdminDashboard = () => {
   const formConfig: { [key: string]: { endpoint: string; columns: string[] } } =
     {
       "Ventes des oeufs de table": {
-        endpoint: "http://192.168.1.87:5050/eggsales",
+        endpoint: "https://farmapi-jimn.onrender.com/eggsales",
         columns: [
           "id",
           "platenumber",
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
         ],
       },
       "Suivis de mise en incubation": {
-        endpoint: "http://192.168.1.87:5050/eggincubation",
+        endpoint: "https://farmapi-jimn.onrender.com/eggincubation",
         columns: [
           "id",
           "species",
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
         ],
       },
       "Oeufs de table par semaine": {
-        endpoint: "http://192.168.1.87:5050/tableeggs",
+        endpoint: "https://farmapi-jimn.onrender.com/tableeggs",
         columns: [
           "id",
           "collectedeggs",
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
         ],
       },
       "Besoins de la ferme": {
-        endpoint: "http://192.168.1.87:5050/farmneeds",
+        endpoint: "https://farmapi-jimn.onrender.com/farmneeds",
         columns: [
           "id",
           "quantity",
@@ -72,7 +72,7 @@ const AdminDashboard = () => {
         ],
       },
       "Production des poussins": {
-        endpoint: "http://192.168.1.87:5050/chickproduction",
+        endpoint: "https://farmapi-jimn.onrender.com/chickproduction",
         columns: [
           "id",
           "receivedchicks",
@@ -84,7 +84,7 @@ const AdminDashboard = () => {
         ],
       },
       "Ventes de la ferme": {
-        endpoint: "http://192.168.1.87:5050/farmsellings",
+        endpoint: "https://farmapi-jimn.onrender.com/farmsellings",
         columns: [
           "id",
           "quantity",

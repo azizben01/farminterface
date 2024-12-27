@@ -58,13 +58,16 @@ export default function VentesDesOeufs() {
           : parseInt(formData.Remainingamount as string),
     };
     try {
-      const response = await fetch("http://192.168.1.87:5050/eggsales", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const response = await fetch(
+        "https://farmapi-jimn.onrender.com/eggsales",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
       if (response.ok) {
         alert("La fiche a bien ete envoyee!");
         setFormData({

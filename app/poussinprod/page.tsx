@@ -58,7 +58,7 @@ const Poussinprod = () => {
 
     try {
       const response = await fetch(
-        "http://192.168.1.87:5050/chickproductionform",
+        "https://farmapi-jimn.onrender.com/chickproductionform",
         {
           method: "POST",
           headers: {
