@@ -96,7 +96,7 @@ export default function Recapitulatifdesoeufs() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-300 flex justify-center items-center p-8">
+    <div className="min-h-screen bg-gray-300 flex justify-center items-center p-4 sm:p-6 md:p-8">
       <div
         className="absolute inset-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: "url('/images/eggtable.jpg')" }}
@@ -104,20 +104,23 @@ export default function Recapitulatifdesoeufs() {
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white bg-opacity-60 p-4 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
-        <h1 className="text-3xl font-bold text-custom-gray1 mb-6 text-center">
+
+      <div className="relative bg-white bg-opacity-60 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl w-full max-h-lg h-full">
+        <h1 className="text-2xl sm:text-3xl font-bold text-custom-gray1 mb-4 sm:mb-6 text-center">
           Fiche recapitulatif des oeufs de table.
         </h1>
-        <p className="text-center text-black mb-8">
+        <p className="text-center text-black mb-4 sm:mb-8">
           Remplissez cette fiche pour enregister la production des oeufs de
           table.
         </p>
 
         {/* Service Request Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           <div className="relative mt-1">
-            <p className="ml-2 text-black">Nombre d&apos;oeufs ramasser</p>
-            <TbEggs className="absolute top-[47px] left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black text-sm sm:text-base">
+              Nombre d&apos;oeufs ramasser
+            </p>
+            <TbEggs className="absolute top-[40px] sm:top-[47px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
               id="OeufsCollects"
@@ -129,13 +132,15 @@ export default function Recapitulatifdesoeufs() {
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
               }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div className="relative mt-1">
-            <p className="ml-2 text-black">Nombre d&apos;oeufs casser</p>
-            <GiDeadHead className="absolute top-[49px] left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black text-sm sm:text-base">
+              Nombre d&apos;oeufs casser
+            </p>
+            <GiDeadHead className="absolute top-[42px] sm:top-[49px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
               id="OeufsCasses"
@@ -147,12 +152,15 @@ export default function Recapitulatifdesoeufs() {
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
               }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
+
           <div className="relative mt-1">
-            <p className="ml-2 text-black">Nombre d&apos;oeufs restants</p>
-            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black text-sm sm:text-base">
+              Nombre d&apos;oeufs restants
+            </p>
+            <TbEggs className="absolute top-[40px] sm:top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
               id="OeufsRestants"
@@ -164,12 +172,15 @@ export default function Recapitulatifdesoeufs() {
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
               }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-3 sm:px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
+
           <div className="relative mt-1">
-            <p className="ml-2 text-black">Nombre de plateaux</p>
-            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black text-sm sm:text-base">
+              Nombre de plateaux
+            </p>
+            <TbEggs className="absolute top-[40px] sm:top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
               id="Nombredeplateux"
@@ -181,19 +192,21 @@ export default function Recapitulatifdesoeufs() {
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
               }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-3 sm:px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div>
-            <p className="ml-2 text-black">Ajouter un commentaire</p>
+            <p className="ml-2 text-black text-sm sm:text-base">
+              Ajouter un commentaire
+            </p>
             <textarea
               id="Description"
               name="Description"
               value={formData.Description}
               onChange={handleInputChange}
               rows={2}
-              className="bg-white text-gray-900 bg-opacity-80 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="bg-white text-gray-900 bg-opacity-80 mt-1 block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
               placeholder={"Ajouter un commentaire"}
             />
           </div>
