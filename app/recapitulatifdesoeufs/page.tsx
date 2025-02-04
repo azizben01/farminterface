@@ -115,7 +115,7 @@ export default function Recapitulatifdesoeufs() {
         </p>
 
         {/* Service Request Form */}
-        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
           <div className="relative mt-1">
             <p className="ml-2 text-black text-sm sm:text-base">
               Nombre d&apos;oeufs ramasser
