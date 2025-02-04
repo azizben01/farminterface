@@ -96,7 +96,7 @@ export default function VentesDeLaFerme() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-300 flex justify-center items-center p-8">
+    <div className="min-h-screen bg-gray-300 flex justify-center items-center p-4">
       <div
         className="absolute inset-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: "url('/images/money.avif')" }}
@@ -104,16 +104,16 @@ export default function VentesDeLaFerme() {
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white bg-opacity-60 mt-8 p-8 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
-        <h1 className="text-3xl font-bold text-custom-gray1 mb-6 text-center">
+      <div className="relative bg-white bg-opacity-60 p-4 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
+        <h1 className="text-3xl font-bold text-custom-gray1 mb-3 text-center">
           Fiche de vente de la ferme
         </h1>
-        <p className="text-center text-black mb-8">
+        <p className="text-center text-black mb-4">
           Remplissez cette fiche en indiquant les ventes de la ferme.
         </p>
 
         {/* Service Request Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div className="relative mt-1">
             <p className="ml-2 text-black">Quantité</p>
             <GoNumber className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
