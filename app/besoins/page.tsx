@@ -97,10 +97,10 @@ const Besoins = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
 
       <div className="relative bg-white bg-opacity-60 p-5 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
-        <h1 className="text-3xl font-bold text-custom-gray1 mb-6 text-center">
+        <h1 className="text-3xl font-bold text-custom-gray1 mb-3 text-center">
           Besoins de la ferme.
         </h1>
-        <p className="text-center text-black mb-8">
+        <p className="text-center text-black mb-5">
           Remplissez cette fiche en indiquant les besoins necessaires de la
           ferme.
         </p>
