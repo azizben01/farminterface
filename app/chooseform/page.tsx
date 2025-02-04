@@ -26,13 +26,13 @@ const Chooseform = () => {
             href="/incubation"
             className="bg-custom-yellow text-black rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-custom-hover hover:text-white hover:shadow-lg transition-all"
           >
-            incubation des oeufs
+            Incubation des oeufs
           </Link>
           <Link
             href="/ventesdesoeufs"
             className="bg-custom-red text-white rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-custom-hover hover:text-white hover:shadow-lg transition-all"
           >
-            Le recapitulatif de vente des oeufs
+            Le récapitulatif de vente des oeufs
           </Link>
           <Link
             href="/besoins"
@@ -44,7 +44,7 @@ const Chooseform = () => {
             href="/recapitulatifdesoeufs"
             className="bg-custom-green text-white rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-custom-hover hover:text-white hover:shadow-lg transition-all"
           >
-            Le recapitulatif des oeufs de table
+            Le récapitulatif des oeufs de table
           </Link>
           <Link
             href="/ventesdelaferme"

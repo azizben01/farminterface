@@ -102,7 +102,7 @@ const Poussinprod = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-300 flex justify-center items-center p-8">
+    <div className="min-h-screen bg-gray-300 flex justify-center items-center p-4 sm:p-6 md:p-8 overflow-y-auto">
       <div
         className="absolute inset-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: "url('/images/eggs.jpg')" }}
@@ -110,16 +110,16 @@ const Poussinprod = () => {
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white bg-opacity-60 p-4 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
-        <h1 className="text-3xl font-bold text-custom-gray1 mb-6 text-center">
+      <div className="relative bg-white bg-opacity-60 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-md sm:max-w-lg md:max-w-xl w-full max-h-screen h-full overflow-y-auto">
+        <h1 className="text-2xl sm:text-3xl font-bold text-custom-gray1 mb-4 sm:mb-6 text-center">
           Production des poussins.
         </h1>
-        <p className="text-center text-black mb-8">
-          Remplissez cette fiche pour declarer la production des poussins.
+        <p className="text-center text-black mb-4 sm:mb-8">
+          Remplissez cette fiche pour déclarer la production des poussins.
         </p>
 
         {/* Service Request Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           <div className="relative mt-1">
             <p className="text-black ml-2">Nombre de poussins recu</p>
             <GiChicken className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
@@ -155,8 +155,9 @@ const Poussinprod = () => {
               className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
+
           <div className="relative mt-1">
-            <p className="text-black ml-2">Nombre d&apos;oeufs eclos</p>
+            <p className="text-black ml-2">Nombre d&apos;oeufs éclos</p>
             <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
@@ -164,7 +165,7 @@ const Poussinprod = () => {
               name="Oeufs_Eclos"
               value={formData.Oeufs_Eclos}
               onChange={handleInputChange}
-              placeholder={"Nombre d'oeufs eclos"}
+              placeholder={"Nombre d'oeufs éclos"}
               required
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
@@ -174,7 +175,7 @@ const Poussinprod = () => {
           </div>
 
           <div className="relative mt-1">
-            <p className="text-black ml-2">Nombre d&apos;oeufs non eclos</p>
+            <p className="text-black ml-2">Nombre d&apos;oeufs non éclos</p>
             <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
@@ -182,7 +183,7 @@ const Poussinprod = () => {
               name="Oeufs_Non_Eclos"
               value={formData.Oeufs_Non_Eclos}
               onChange={handleInputChange}
-              placeholder={"Nombre d'oeufs non eclos"}
+              placeholder={"Nombre d'oeufs non éclos"}
               required
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
@@ -193,7 +194,7 @@ const Poussinprod = () => {
 
           <div>
             <p className="text-black ml-2">
-              Ajouter un commentaire si necessaire
+              Ajouter un commentaire si nécessaire
             </p>
             <textarea
               id="Description"
@@ -210,7 +211,7 @@ const Poussinprod = () => {
             type="submit"
             className="w-full bg-gray-900 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-800 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
           >
-            Enregister
+            Enregistrer
           </button>
         </form>
       </div>
