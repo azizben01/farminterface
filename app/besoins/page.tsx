@@ -106,7 +106,7 @@ const Besoins = () => {
         </p>
 
         {/* Service Request Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div className="relative mt-1">
             <p className="ml-2 text-black">Quantité</p>
             <GoNumber className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
