@@ -102,7 +102,7 @@ const Poussinprod = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-300 flex justify-center mt-5 sm:p-6 md:p-8 overflow-y-auto">
+    <div className="min-h-screen bg-gray-300 flex justify-center items-center sm:p-6 md:p-8">
       <div
         className="absolute inset-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: "url('/images/eggs.jpg')" }}
@@ -110,7 +110,7 @@ const Poussinprod = () => {
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white bg-opacity-60 p-2 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-md sm:max-w-lg md:max-w-xl w-full max-h-screen h-full overflow-y-auto">
+      <div className="relative bg-white bg-opacity-60 p-2 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl w-full max-h-lg h-full">
         <h1 className="text-2xl sm:text-3xl font-bold text-custom-gray1 mb-4 sm:mb-6 text-center">
           Production des poussins.
         </h1>

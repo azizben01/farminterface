@@ -21,9 +21,8 @@ const AdminDashboard = () => {
   const formConfig: { [key: string]: { endpoint: string; columns: string[] } } =
     {
       "Ventes des oeufs de table": {
-        endpoint: "http://192.168.1.87:5050/eggsales",
+        endpoint: "http://192.168.1.4:5050/eggsales",
         columns: [
-          "id",
           "nombre_de_plateaux",
           "prix_unitaire",
           "montant",
@@ -31,12 +30,12 @@ const AdminDashboard = () => {
           "montant_restant",
           "description",
           "data_creation",
+          "id",
         ],
       },
       "Suivis de mise en incubation": {
-        endpoint: "http://192.168.1.87:5050/eggincubation",
+        endpoint: "http://192.168.1.4:5050/eggincubation",
         columns: [
-          "id",
           "espece",
           "date_incubation",
           "oeufs_incuber",
@@ -46,52 +45,53 @@ const AdminDashboard = () => {
           "date_eclosion",
           "mise_en_closoir",
           "description",
+          "id",
         ],
       },
       "Oeufs de table par semaine": {
-        endpoint: "http://192.168.1.87:5050/tableeggs",
+        endpoint: "http://192.168.1.4:5050/tableeggs",
         columns: [
-          "id",
           "oeufs_collectes",
           "oeufs_casses",
           "oeufs_restants",
           "nombre_de_plateaux",
           "description",
           "date_creation",
+          "id",
         ],
       },
       "Besoins de la ferme": {
-        endpoint: "http://192.168.1.87:5050/farmneeds",
+        endpoint: "http://192.168.1.4:5050/farmneeds",
         columns: [
-          "id",
           "quantite",
           "prix_unitaire",
           "montant_total",
           "description",
           "date_creation",
+          "id",
         ],
       },
       "Production des poussins": {
-        endpoint: "http://192.168.1.87:5050/chickproduction",
+        endpoint: "http://192.168.1.4:5050/chickproduction",
         columns: [
-          "id",
           "poussins_recus",
           "poussins_perdus",
           "oeufs_eclos",
           "oeufs_non_eclos",
           "description",
           "date_creation",
+          "id",
         ],
       },
       "Ventes de la ferme": {
-        endpoint: "http://192.168.1.87:5050/farmsellings",
+        endpoint: "http://192.168.1.4:5050/farmsellings",
         columns: [
-          "id",
           "quantite",
           "prix_unitaire",
           "montant_total",
           "description",
           "date_creation",
+          "id",
         ],
       },
     };
@@ -127,89 +127,92 @@ const AdminDashboard = () => {
   };
 
   return (
-    <main className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+    <main className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
         Tableau de bord administrateur
       </h1>
 
-      <div className="flex flex-col lg:flex-row justify-between items-center gap-4 bg-white p-4 rounded-lg shadow">
-        <select
-          value={selectedForm}
-          onChange={(e) => setSelectedForm(e.target.value)}
-          className="border border-gray-300 rounded-lg px-4 py-2 text-black focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="" disabled>
+      {/* Filters Section */}
+      <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
+        <div className="space-y-4">
+          <label className="block text-lg font-medium text-gray-700">
             Sélectionnez un formulaire
-          </option>
-          {Object.keys(formConfig).map((form, index) => (
-            <option key={`form-${index}`} value={form}>
-              {form}
+          </label>
+          <select
+            value={selectedForm}
+            onChange={(e) => setSelectedForm(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+          >
+            <option value="" disabled>
+              Choisissez un formulaire
             </option>
-          ))}
-        </select>
+            {Object.keys(formConfig).map((form, index) => (
+              <option key={`form-${index}`} value={form}>
+                {form}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <div className="flex items-center gap-4">
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            className="border text-black border-gray-300 rounded-lg px-4 py-2"
-            placeholderText="Date de début"
-          />
-          <DatePicker
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            className="border text-black border-gray-300 rounded-lg px-4 py-2"
-            placeholderText="Date de fin"
-          />
+        <div className="mt-6 space-y-4">
+          <label className="block text-lg font-medium text-gray-700">
+            Sélectionnez une période
+          </label>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              className="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+              placeholderText="Date de début"
+            />
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              className="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+              placeholderText="Date de fin"
+            />
+          </div>
         </div>
       </div>
 
-      <div className="mt-6 bg-white rounded-lg shadow">
-        <table className="w-full text-left border-collapse">
-          <thead className="bg-gray-500">
-            <tr>
-              {columns.map((col, index) => (
-                <th key={`col-${index}`} className="p-4 border-b">
-                  {col}
-                </th>
-              ))}
-              <th className="p-4 border-b text-center">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.length === 0 ? (
-              <tr>
-                <td
-                  colSpan={columns.length + 1}
-                  className="p-4 text-center text-gray-500"
-                >
-                  Aucun enregistrement trouvé.
-                </td>
-              </tr>
-            ) : (
-              data.map((item) => (
-                <tr key={`row-${item.id}`}>
-                  {columns.map((col, colIndex) => (
-                    <td
-                      key={`cell-${item.id}-${colIndex}`}
-                      className="p-4 border-b text-black"
-                    >
+      {/* Data Display Section */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {data.length === 0 ? (
+          <div className="col-span-full bg-white p-6 rounded-xl shadow-sm text-center text-gray-500 text-lg">
+            Aucun enregistrement trouvé.
+          </div>
+        ) : (
+          data.map((item) => (
+            <div
+              key={`card-${item.id}`}
+              className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow border-l-4 border-blue-500"
+            >
+              <div className="space-y-4">
+                {columns.map((col, colIndex) => (
+                  <div
+                    key={`card-${item.id}-${colIndex}`}
+                    className="space-y-1"
+                  >
+                    <p className="text-sm font-medium text-gray-500 uppercase">
+                      {col}
+                    </p>
+                    <p className="text-lg font-semibold text-blue-700">
                       {item[col]}
-                    </td>
-                  ))}
-                  <td className="p-4 border-b text-center">
-                    <button
-                      className="text-red-500 hover:text-red-700 mx-2"
-                      onClick={() => handleDelete(item.id)}
-                    >
-                      <FaTrash />
-                    </button>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 flex justify-end">
+                <button
+                  className="text-red-500 hover:text-red-700 transition-colors"
+                  onClick={() => handleDelete(item.id)}
+                >
+                  <FaTrash size={20} />
+                </button>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </main>
   );
