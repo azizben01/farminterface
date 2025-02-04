@@ -87,7 +87,7 @@ const Besoins = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-300 flex justify-center items-center p-8">
+    <div className="min-h-screen bg-gray-300 flex justify-center items-center p-2 sm:p-6 md:p-8">
       <div
         className="absolute inset-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: "url('/images/money.avif')" }}
@@ -95,7 +95,8 @@ const Besoins = () => {
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white bg-opacity-60 mt-8 p-8 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
+
+      <div className="relative bg-white bg-opacity-60 mt-8 p-5 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
         <h1 className="text-3xl font-bold text-custom-gray1 mb-6 text-center">
           Besoins de la ferme.
         </h1>
@@ -141,6 +142,7 @@ const Besoins = () => {
               className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
+
           <div className="relative mt-1">
             <p className="ml-2 text-black">Montant Total</p>
             <GiMoneyStack className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
