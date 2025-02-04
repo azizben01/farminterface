@@ -96,7 +96,7 @@ const Besoins = () => {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
 
-      <div className="relative bg-white bg-opacity-60 mt-8 p-5 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
+      <div className="relative bg-white bg-opacity-60 p-5 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
         <h1 className="text-3xl font-bold text-custom-gray1 mb-6 text-center">
           Besoins de la ferme.
         </h1>

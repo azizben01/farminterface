@@ -114,7 +114,7 @@ const Incubation = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-300 flex justify-center items-center p-4 sm:p-6 md:p-8">
+    <div className="min-h-full bg-gray-300 flex justify-center items-center p-4 sm:p-6 md:p-8">
       <div
         className="absolute inset-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: "url('/images/incubation.jpg')" }}
