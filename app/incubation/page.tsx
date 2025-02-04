@@ -112,9 +112,8 @@ const Incubation = () => {
   ) => {
     element.setCustomValidity("Vous devez obligatoirement remplir ce champ.");
   };
-
   return (
-    <div className="min-h-screen bg-gray-300 flex justify-center items-center">
+    <div className="min-h-screen bg-gray-300 flex justify-center items-center p-4 sm:p-6 md:p-8 overflow-y-auto">
       <div
         className="absolute inset-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: "url('/images/incubation.jpg')" }}
@@ -122,17 +121,18 @@ const Incubation = () => {
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white bg-opacity-60 p-8 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
-        <h1 className="text-3xl font-bold text-custom-gray1 mb-4 text-center">
-          Incubation des poussins.
+
+      <div className="relative bg-white bg-opacity-60 p-4 sm:p-6 md:p-8 rounded-lg shadow-lg w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl max-h-screen overflow-y-auto">
+        <h1 className="text-2xl sm:text-3xl font-bold text-custom-gray1 mb-4 text-center">
+          Incubation des Oeufs.
         </h1>
-        <p className="text-center text-black mb-4">
-          Remplissez cette fiche pour déclarer incubation des poussins.
+        <p className="text-center text-black mb-4 text-sm sm:text-base">
+          Remplissez cette fiche pour déclarer incubation des Oeufs.
         </p>
 
         {/* Incubation Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="relative mt-1">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+          <div className="relative">
             <select
               id="espece"
               name="Espece"
@@ -142,7 +142,7 @@ const Incubation = () => {
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
               }}
-              className="bg-white text-gray-900 bg-opacity-80 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="bg-white text-gray-900 bg-opacity-80 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             >
               <option value="">Sélectionnez une espèce</option>
               <option value="goliath">Goliath</option>
@@ -151,8 +151,8 @@ const Incubation = () => {
             </select>
           </div>
 
-          <div className="relative mt-1">
-            <p className="ml-2 text-black">
+          <div className="relative">
+            <p className="ml-2 text-black text-sm sm:text-base">
               Nombre d&apos;oeufs mis en incubation
             </p>
             <GiChicken className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
@@ -168,8 +168,10 @@ const Incubation = () => {
             />
           </div>
 
-          <div className="relative mt-1">
-            <p className="ml-2 text-black"> Nombre d&apos;oeufs non féconds </p>
+          <div className="relative">
+            <p className="ml-2 text-black text-sm sm:text-base">
+              Nombre d&apos;oeufs non féconds
+            </p>
             <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
@@ -183,8 +185,10 @@ const Incubation = () => {
             />
           </div>
 
-          <div className="relative mt-1">
-            <p className="ml-2 text-black">Nombre d&apos;oeufs féconds</p>
+          <div className="relative">
+            <p className="ml-2 text-black text-sm sm:text-base">
+              Nombre d&apos;oeufs féconds
+            </p>
             <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
@@ -202,7 +206,7 @@ const Incubation = () => {
           </div>
 
           <div>
-            <p className="ml-2 text-black">
+            <p className="ml-2 text-black text-sm sm:text-base">
               Ajouter un commentaire si necessaire
             </p>
             <textarea
@@ -227,5 +231,4 @@ const Incubation = () => {
     </div>
   );
 };
-
 export default Incubation;
