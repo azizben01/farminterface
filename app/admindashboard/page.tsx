@@ -21,77 +21,77 @@ const AdminDashboard = () => {
   const formConfig: { [key: string]: { endpoint: string; columns: string[] } } =
     {
       "Ventes des oeufs de table": {
-        endpoint: "https://farmapi-jimn.onrender.com/eggsales",
+        endpoint: "http://192.168.1.87:5050/eggsales",
         columns: [
           "id",
-          "platenumber",
-          "unitprice",
-          "amount",
-          "receivedamount",
-          "remainingamount",
+          "nombre_de_plateaux",
+          "prix_unitaire",
+          "montant",
+          "montant_recu",
+          "montant_restant",
           "description",
-          "created",
+          "data_creation",
         ],
       },
       "Suivis de mise en incubation": {
-        endpoint: "https://farmapi-jimn.onrender.com/eggincubation",
+        endpoint: "http://192.168.1.87:5050/eggincubation",
         columns: [
           "id",
-          "species",
-          "incubationdate",
-          "incubatedeggs",
-          "fertilizedeggs",
-          "unfertilizedeggs",
-          "miragedate",
-          "hatchingdate",
-          "miseeneclosoire",
+          "espece",
+          "date_incubation",
+          "oeufs_incuber",
+          "oeufs_fertiliser",
+          "oeufs_non_fertiliser",
+          "date_mirage",
+          "date_eclosion",
+          "mise_en_closoir",
           "description",
         ],
       },
       "Oeufs de table par semaine": {
-        endpoint: "https://farmapi-jimn.onrender.com/tableeggs",
+        endpoint: "http://192.168.1.87:5050/tableeggs",
         columns: [
           "id",
-          "collectedeggs",
-          "brokeneggs",
-          "remainingeggs",
-          "platenumber",
+          "oeufs_collectes",
+          "oeufs_casses",
+          "oeufs_restants",
+          "nombre_de_plateaux",
           "description",
-          "created",
+          "date_creation",
         ],
       },
       "Besoins de la ferme": {
-        endpoint: "https://farmapi-jimn.onrender.com/farmneeds",
+        endpoint: "http://192.168.1.87:5050/farmneeds",
         columns: [
           "id",
-          "quantity",
-          "unitprice",
-          "totalamount",
+          "quantite",
+          "prix_unitaire",
+          "montant_total",
           "description",
-          "created",
+          "date_creation",
         ],
       },
       "Production des poussins": {
-        endpoint: "https://farmapi-jimn.onrender.com/chickproduction",
+        endpoint: "http://192.168.1.87:5050/chickproduction",
         columns: [
           "id",
-          "receivedchicks",
-          "lostchicks",
-          "hatchedeggs",
-          "unhatchedeggs",
+          "poussins_recus",
+          "poussins_perdus",
+          "oeufs_eclos",
+          "oeufs_non_eclos",
           "description",
-          "created",
+          "date_creation",
         ],
       },
       "Ventes de la ferme": {
-        endpoint: "https://farmapi-jimn.onrender.com/farmsellings",
+        endpoint: "http://192.168.1.87:5050/farmsellings",
         columns: [
           "id",
-          "quantity",
-          "unitprice",
-          "totalamount",
+          "quantite",
+          "prix_unitaire",
+          "montant_total",
           "description",
-          "created",
+          "date_creation",
         ],
       },
     };
@@ -152,13 +152,13 @@ const AdminDashboard = () => {
           <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
-            className="border border-gray-300 rounded-lg px-4 py-2"
+            className="border text-black border-gray-300 rounded-lg px-4 py-2"
             placeholderText="Date de début"
           />
           <DatePicker
             selected={endDate}
             onChange={(date) => setEndDate(date)}
-            className="border border-gray-300 rounded-lg px-4 py-2"
+            className="border text-black border-gray-300 rounded-lg px-4 py-2"
             placeholderText="Date de fin"
           />
         </div>

@@ -4,16 +4,16 @@ import { GoNumber } from "react-icons/go";
 import { GiMoneyStack } from "react-icons/gi";
 
 type FormData = {
-  Quantity: number | string;
-  Unitprice: number | string;
-  Totalamount: number | string;
+  Quantite: number | string;
+  Prix_Unitaire: number | string;
+  Montant_Total: number | string;
   Description: string;
 };
 const Besoins = () => {
   const [formData, setFormData] = useState<FormData>({
-    Quantity: "",
-    Unitprice: "",
-    Totalamount: "",
+    Quantite: "",
+    Prix_Unitaire: "",
+    Montant_Total: "",
     Description: "",
   });
 
@@ -27,38 +27,48 @@ const Besoins = () => {
       ...prevData,
       [name]: name === "Description" ? value : value ? parseInt(value, 10) : "",
     }));
+    // Set custom validation message in French
+    if (event.target.validity.valueMissing) {
+      setFrenchValidationMessage(
+        event.target as HTMLInputElement | HTMLTextAreaElement
+      );
+    } else {
+      event.target.setCustomValidity("");
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const dataToSend = {
       ...formData,
-      Quantity: formData.Quantity === "" ? null : (formData.Quantity as number),
+      Quantity: formData.Quantite === "" ? null : (formData.Quantite as number),
       Unitprice:
-        formData.Unitprice === "" ? null : (formData.Unitprice as number),
+        formData.Prix_Unitaire === ""
+          ? null
+          : (formData.Prix_Unitaire as number),
       TotalAmount:
-        formData.Totalamount === "" ? null : (formData.Totalamount as number),
+        formData.Montant_Total === ""
+          ? null
+          : (formData.Montant_Total as number),
     };
 
     try {
-      const response = await fetch(
-        "https://farmapi-jimn.onrender.com/farmneeds",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataToSend),
-        }
-      );
+      const response = await fetch("http://192.168.1.4:5050/farmneeds", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
       if (response.ok) {
         alert("La fiche a bien ete envoyee!");
         setFormData({
-          Quantity: "",
-          Unitprice: "",
-          Totalamount: "",
+          Quantite: "",
+          Prix_Unitaire: "",
+          Montant_Total: "",
           Description: "",
         });
+        console.log("la forme:", formData);
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message || "Une erreur s'est produite."}`);
@@ -69,6 +79,11 @@ const Besoins = () => {
         "Une erreur s'est produite pendant la soumission de la fiche. Reessayez a nouveau."
       );
     }
+  };
+  const setFrenchValidationMessage = (
+    element: HTMLInputElement | HTMLTextAreaElement
+  ) => {
+    element.setCustomValidity("Vous devez obligatoirement remplir ce champ.");
   };
 
   return (
@@ -92,47 +107,62 @@ const Besoins = () => {
         {/* Service Request Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative mt-1">
-            <GoNumber className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black">Quantité</p>
+            <GoNumber className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Quantity"
-              name="Quantity"
-              value={formData.Quantity}
+              id="Quantite"
+              name="Quantite"
+              value={formData.Quantite}
               onChange={handleInputChange}
-              placeholder={"Quantite"}
+              placeholder={"Quantité"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div className="relative mt-1">
-            <GiMoneyStack className="absolute top-1/2  left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black">Prix Unitaire</p>
+            <GiMoneyStack className="absolute top-[48px]  left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Unitprice"
-              name="Unitprice"
-              value={formData.Unitprice}
+              id="PrixUnitaire"
+              name="Prix_Unitaire"
+              value={formData.Prix_Unitaire}
               onChange={handleInputChange}
-              placeholder={"Prix unitaire"}
+              placeholder={"Prix Unitaire"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
           <div className="relative mt-1">
-            <GiMoneyStack className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black">Montant Total</p>
+            <GiMoneyStack className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Totalamount"
-              name="Totalamount"
-              value={formData.Totalamount}
+              id="MontantTotal"
+              name="Montant_Total"
+              value={formData.Montant_Total}
               onChange={handleInputChange}
               placeholder={"Montant total"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div>
+            <p className="ml-2 text-black">
+              Vous devez décrire le besoin d&apos;achat
+            </p>
             <textarea
               id="Description"
               name="Description"
@@ -140,6 +170,9 @@ const Besoins = () => {
               onChange={handleInputChange}
               rows={2}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
               placeholder={"Description"}
             />

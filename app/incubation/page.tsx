@@ -4,20 +4,20 @@ import { GiChicken } from "react-icons/gi";
 import { TbEggs } from "react-icons/tb";
 
 type FormData = {
-  Incubatedeggs: number | string;
-  Fertilizedeggs: number | string;
-  Unfertilizedeggs: number | string;
+  oeufs_incuber: number | string;
+  oeufs_fertiliser: number | string;
+  oeufs_non_fertiliser: number | string;
   Description: string;
-  Species: string;
+  Espece: string;
 };
 
 const Incubation = () => {
   const [formData, setFormData] = useState<FormData>({
-    Incubatedeggs: "",
-    Fertilizedeggs: "",
-    Unfertilizedeggs: "",
+    oeufs_incuber: "",
+    oeufs_fertiliser: "",
+    oeufs_non_fertiliser: "",
     Description: "",
-    Species: "", // Default species
+    Espece: "", // Default species
   });
 
   const handleInputChange = (
@@ -30,52 +30,72 @@ const Incubation = () => {
     setFormData((prevData) => ({
       ...prevData,
       [name]:
-        name === "Species" || name === "Description"
+        name === "Espece" || name === "Description"
           ? value
           : parseInt(value, 10) || "",
     }));
+    // Set custom validation message in French
+    if (event.target.validity.valueMissing) {
+      setFrenchValidationMessage(
+        event.target as HTMLInputElement | HTMLTextAreaElement
+      );
+    } else {
+      event.target.setCustomValidity("");
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const dataToSend = {
-      ...formData,
-      Incubatedeggs:
-        formData.Incubatedeggs === ""
-          ? null
-          : parseInt(formData.Incubatedeggs as string),
-      Fertilizedeggs:
-        formData.Fertilizedeggs === ""
-          ? null
-          : parseInt(formData.Fertilizedeggs as string),
-      Unfertilizedeggs:
-        formData.Unfertilizedeggs === ""
-          ? null
-          : parseInt(formData.Unfertilizedeggs as string),
-    };
+    // const dataToSend = {
+    //   ...formData,
+    //   oeufs_incuber:
+    //     formData.oeufs_incuber === ""
+    //       ? null
+    //       : parseInt(formData.oeufs_incuber as string),
+    //   oeufs_fertiliser:
+    //     formData.oeufs_fertiliser === ""
+    //       ? null
+    //       : parseInt(formData.oeufs_fertiliser as string),
+    //   oeufs_non_fertiliser:
+    //     formData.oeufs_non_fertiliser === ""
+    //       ? null
+    //       : parseInt(formData.oeufs_non_fertiliser as string),
+    // };
 
+    const dataToSend = {
+      oeufs_incuber:
+        formData.oeufs_incuber === "" ? null : Number(formData.oeufs_incuber),
+      oeufs_fertiliser:
+        formData.oeufs_fertiliser === ""
+          ? null
+          : Number(formData.oeufs_fertiliser),
+      oeufs_non_fertiliser:
+        formData.oeufs_non_fertiliser === ""
+          ? null
+          : Number(formData.oeufs_non_fertiliser),
+      description: formData.Description,
+      espece: formData.Espece,
+    };
     try {
-      const response = await fetch(
-        "https://farmapi-jimn.onrender.com/eggincubation",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataToSend),
-        }
-      );
+      const response = await fetch("http://192.168.1.4:5050/eggincubation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
 
       if (response.ok) {
         alert("La fiche a bien été envoyée!");
         setFormData({
-          Incubatedeggs: "",
-          Fertilizedeggs: "",
-          Unfertilizedeggs: "",
+          oeufs_incuber: "",
+          oeufs_fertiliser: "",
+          oeufs_non_fertiliser: "",
           Description: "",
-          Species: "goliath",
+          Espece: "goliath",
         });
+        console.log("la forme envoyee:", formData);
       } else {
         const errorData = await response.json();
         alert(`Erreur: ${errorData.error || "Une erreur s'est produite."}`);
@@ -86,6 +106,11 @@ const Incubation = () => {
         "Une erreur s'est produite pendant la soumission de la fiche. Réessayez à nouveau."
       );
     }
+  };
+  const setFrenchValidationMessage = (
+    element: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  ) => {
+    element.setCustomValidity("Vous devez obligatoirement remplir ce champ.");
   };
 
   return (
@@ -109,12 +134,17 @@ const Incubation = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative mt-1">
             <select
-              id="Species"
-              name="Species"
-              value={formData.Species}
+              id="espece"
+              name="Espece"
+              value={formData.Espece}
+              required
               onChange={handleInputChange}
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             >
+              <option value="">Sélectionnez une espèce</option>
               <option value="goliath">Goliath</option>
               <option value="cailles">Cailles</option>
               <option value="pintades">Pintades</option>
@@ -122,12 +152,15 @@ const Incubation = () => {
           </div>
 
           <div className="relative mt-1">
-            <GiChicken className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black">
+              Nombre d&apos;oeufs mis en incubation
+            </p>
+            <GiChicken className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Incubatedeggs"
-              name="Incubatedeggs"
-              value={formData.Incubatedeggs}
+              id="OeufsIncuber"
+              name="oeufs_incuber"
+              value={formData.oeufs_incuber}
               onChange={handleInputChange}
               placeholder={"Nombre d'oeufs mis en incubation"}
               required
@@ -136,12 +169,13 @@ const Incubation = () => {
           </div>
 
           <div className="relative mt-1">
-            <TbEggs className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black"> Nombre d&apos;oeufs non féconds </p>
+            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Unfertilizedeggs"
-              name="Unfertilizedeggs"
-              value={formData.Unfertilizedeggs}
+              id="OeufsNonFertiliser"
+              name="oeufs_non_fertiliser"
+              value={formData.oeufs_non_fertiliser}
               onChange={handleInputChange}
               placeholder={"Nombre d'oeufs non féconds"}
               required
@@ -150,20 +184,27 @@ const Incubation = () => {
           </div>
 
           <div className="relative mt-1">
-            <TbEggs className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black">Nombre d&apos;oeufs féconds</p>
+            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Fertilizedeggs"
-              name="Fertilizedeggs"
-              value={formData.Fertilizedeggs}
+              id="OeufsFertiliser"
+              name="oeufs_fertiliser"
+              value={formData.oeufs_fertiliser}
               onChange={handleInputChange}
               placeholder={"Nombre d'oeufs féconds"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div>
+            <p className="ml-2 text-black">
+              Ajouter un commentaire si necessaire
+            </p>
             <textarea
               id="Description"
               name="Description"

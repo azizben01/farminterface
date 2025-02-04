@@ -5,19 +5,19 @@ import { TbEggs } from "react-icons/tb";
 import { GiDeadHead } from "react-icons/gi";
 
 type FormData = {
-  Receivedchicks: number | string; // Allow string during input
-  Lostchicks: number | string; // Allow string during input
-  Hatchedeggs: number | string; // Allow string during input
-  Unhatchedeggs: number | string; // Allow string during input
+  Poussins_Recus: number | string; // Allow string during input
+  Poussins_Perdus: number | string; // Allow string during input
+  Oeufs_Eclos: number | string; // Allow string during input
+  Oeufs_Non_Eclos: number | string; // Allow string during input
   Description: string;
 };
 
 const Poussinprod = () => {
   const [formData, setFormData] = useState<FormData>({
-    Receivedchicks: "",
-    Lostchicks: "",
-    Hatchedeggs: "",
-    Unhatchedeggs: "",
+    Poussins_Recus: "",
+    Poussins_Perdus: "",
+    Oeufs_Eclos: "",
+    Oeufs_Non_Eclos: "",
     Description: "",
   });
 
@@ -30,6 +30,14 @@ const Poussinprod = () => {
       ...prevData,
       [name]: name === "Description" ? value : value ? parseInt(value, 10) : "",
     }));
+    // Set custom validation message in French
+    if (event.target.validity.valueMissing) {
+      setFrenchValidationMessage(
+        event.target as HTMLInputElement | HTMLTextAreaElement
+      );
+    } else {
+      event.target.setCustomValidity("");
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -38,27 +46,27 @@ const Poussinprod = () => {
     // Prepare the data, ensuring all numeric values are integers
     const dataToSend = {
       ...formData, //JS spread operator used to copy all properties from the formData into dataToSend.
-      Receivedchicks:
-        formData.Receivedchicks === ""
+      PoussinsRecus:
+        formData.Poussins_Recus === ""
           ? null
-          : parseInt(formData.Receivedchicks as string),
+          : parseInt(formData.Poussins_Recus as string),
       Lostchicks:
-        formData.Lostchicks === ""
+        formData.Poussins_Perdus === ""
           ? null
-          : parseInt(formData.Lostchicks as string),
+          : parseInt(formData.Poussins_Perdus as string),
       Hatchedeggs:
-        formData.Hatchedeggs === ""
+        formData.Oeufs_Eclos === ""
           ? null
-          : parseInt(formData.Hatchedeggs as string),
+          : parseInt(formData.Oeufs_Eclos as string),
       Unhatchedeggs:
-        formData.Unhatchedeggs === ""
+        formData.Oeufs_Non_Eclos === ""
           ? null
-          : parseInt(formData.Unhatchedeggs as string),
+          : parseInt(formData.Oeufs_Non_Eclos as string),
     };
 
     try {
       const response = await fetch(
-        "https://farmapi-jimn.onrender.com/chickproductionform",
+        "http://192.168.1.4:5050/chickproductionform",
         {
           method: "POST",
           headers: {
@@ -71,12 +79,13 @@ const Poussinprod = () => {
       if (response.ok) {
         alert("La fiche a bien ete envoyee!");
         setFormData({
-          Receivedchicks: "",
-          Lostchicks: "",
-          Hatchedeggs: "",
-          Unhatchedeggs: "",
+          Poussins_Recus: "",
+          Poussins_Perdus: "",
+          Oeufs_Eclos: "",
+          Oeufs_Non_Eclos: "",
           Description: "",
         });
+        console.log("la forme envoyee:", formData);
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message || "Something went wrong"}`);
@@ -85,6 +94,11 @@ const Poussinprod = () => {
       console.error("Error submitting form:", error);
       alert("An error occurred while submitting the form. Please try again.");
     }
+  };
+  const setFrenchValidationMessage = (
+    element: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  ) => {
+    element.setCustomValidity("Vous devez obligatoirement remplir ce champ.");
   };
 
   return (
@@ -96,7 +110,7 @@ const Poussinprod = () => {
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white bg-opacity-60 mt-8 p-8 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
+      <div className="relative bg-white bg-opacity-60 p-4 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
         <h1 className="text-3xl font-bold text-custom-gray1 mb-6 text-center">
           Production des poussins.
         </h1>
@@ -107,61 +121,80 @@ const Poussinprod = () => {
         {/* Service Request Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative mt-1">
-            <GiChicken className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="text-black ml-2">Nombre de poussins recu</p>
+            <GiChicken className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Receivedchicks"
-              name="Receivedchicks"
-              value={formData.Receivedchicks}
+              id="PoussinsRecus"
+              name="Poussins_Recus"
+              value={formData.Poussins_Recus}
               onChange={handleInputChange}
               placeholder={"Nombre de poussins recu"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div className="relative mt-1">
-            <GiDeadHead className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="text-black ml-2">Nombre de poussins perdu</p>
+            <GiDeadHead className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Lostchicks"
-              name="Lostchicks"
-              value={formData.Lostchicks}
+              id="PoussinsPerdus"
+              name="Poussins_Perdus"
+              value={formData.Poussins_Perdus}
               onChange={handleInputChange}
               placeholder={"Nombre de poussins perdu"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
           <div className="relative mt-1">
-            <TbEggs className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="text-black ml-2">Nombre d&apos;oeufs eclos</p>
+            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Hatchedeggs"
-              name="Hatchedeggs"
-              value={formData.Hatchedeggs}
+              id="OeufsEclos"
+              name="Oeufs_Eclos"
+              value={formData.Oeufs_Eclos}
               onChange={handleInputChange}
               placeholder={"Nombre d'oeufs eclos"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div className="relative mt-1">
-            <TbEggs className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="text-black ml-2">Nombre d&apos;oeufs non eclos</p>
+            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Unhatchedeggs"
-              name="Unhatchedeggs"
-              value={formData.Unhatchedeggs}
+              id="OeufsNonEclos"
+              name="Oeufs_Non_Eclos"
+              value={formData.Oeufs_Non_Eclos}
               onChange={handleInputChange}
               placeholder={"Nombre d'oeufs non eclos"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div>
+            <p className="text-black ml-2">
+              Ajouter un commentaire si necessaire
+            </p>
             <textarea
               id="Description"
               name="Description"

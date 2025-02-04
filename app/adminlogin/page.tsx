@@ -1,11 +1,48 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { PiEye, PiEyeSlash } from "react-icons/pi";
 
 const Adminlogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://192.168.1.4:5050/adminlogin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Invalid credentials");
+      }
+
+      const data = await response.json();
+
+      if (data.message === "Login successful") {
+        router.push(`/admindashboard`);
+        // Store the email or reset token in sessionStorage
+        sessionStorage.setItem("loginEmail", data.email);
+      } else {
+        setError("Invalid login. Please try again.");
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error has occurred");
+      }
+    }
+  };
 
   return (
     <main className="flex items-center justify-center min-h-screen bg-gray-900">
@@ -26,8 +63,9 @@ const Adminlogin = () => {
         <p className="text-gray-300 text-center mb-8">
           Entrez votre adresse e-mail et mot de passe pour vous connecter.
         </p>
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-        <form className="space-y-6 w-full" onSubmit={() => {}}>
+        <form className="space-y-6 w-full" onSubmit={handleLogin}>
           {/* Email Input */}
           <div>
             <input
@@ -82,7 +120,6 @@ const Adminlogin = () => {
             Changez le ici
           </a>
         </p>
-        <a href="admindashboard">Go to admin dashboard</a>
       </div>
     </main>
   );

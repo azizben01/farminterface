@@ -4,18 +4,18 @@ import { GiDeadHead } from "react-icons/gi";
 import { TbEggs } from "react-icons/tb";
 
 type FormData = {
-  Collectedeggs: number | string;
-  Brokeneggs: number | string;
-  Remainingeggs: number | string;
-  Platenumber: number | string;
+  oeufs_collectes: number | string;
+  oeufs_casses: number | string;
+  oeufs_restants: number | string;
+  nombre_de_plateaux: number | string;
   Description: string;
 };
 export default function Recapitulatifdesoeufs() {
   const [formData, setFormData] = useState<FormData>({
-    Collectedeggs: "",
-    Brokeneggs: "",
-    Remainingeggs: "",
-    Platenumber: "",
+    oeufs_collectes: "",
+    oeufs_casses: "",
+    oeufs_restants: "",
+    nombre_de_plateaux: "",
     Description: "",
   });
   const handleInputChange = (
@@ -28,48 +28,54 @@ export default function Recapitulatifdesoeufs() {
       ...prevData,
       [name]: name === "Description" ? value : value ? parseInt(value, 10) : "",
     }));
+    // Set custom validation message in French
+    if (event.target.validity.valueMissing) {
+      setFrenchValidationMessage(
+        event.target as HTMLInputElement | HTMLTextAreaElement
+      );
+    } else {
+      event.target.setCustomValidity("");
+    }
   };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // prepare all data, ensuring all numeric values are integers
     const dataToSend = {
       ...formData,
-      Collectedeggs:
-        formData.Collectedeggs === ""
+      oeufs_collectes:
+        formData.oeufs_collectes === ""
           ? null
-          : parseInt(formData.Collectedeggs as string),
-      Brokeneggs:
-        formData.Brokeneggs === ""
+          : parseInt(formData.oeufs_collectes as string),
+      oeufs_casses:
+        formData.oeufs_casses === ""
           ? null
-          : parseInt(formData.Brokeneggs as string),
-      Remainingeggs:
-        formData.Remainingeggs === ""
+          : parseInt(formData.oeufs_casses as string),
+      oeufs_restants:
+        formData.oeufs_restants === ""
           ? null
-          : parseInt(formData.Remainingeggs as string),
-      Platenumber:
-        formData.Platenumber === ""
+          : parseInt(formData.oeufs_restants as string),
+      nombre_de_plateaux:
+        formData.nombre_de_plateaux === ""
           ? null
-          : parseInt(formData.Platenumber as string),
+          : parseInt(formData.nombre_de_plateaux as string),
     };
     try {
-      const response = await fetch(
-        "https://farmapi-jimn.onrender.com/tableeggs",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataToSend),
-        }
-      );
+      const response = await fetch("http://192.168.1.4:5050/tableeggs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
       if (response.ok) {
         alert("La fiche a bien ete envoyee!");
         setFormData({
-          Collectedeggs: "",
-          Brokeneggs: "",
-          Remainingeggs: "",
-          Platenumber: "",
+          oeufs_collectes: "",
+          oeufs_casses: "",
+          oeufs_restants: "",
+          nombre_de_plateaux: "",
           Description: "",
         });
       } else {
@@ -83,6 +89,11 @@ export default function Recapitulatifdesoeufs() {
       );
     }
   };
+  const setFrenchValidationMessage = (
+    element: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  ) => {
+    element.setCustomValidity("Vous devez obligatoirement remplir ce champ.");
+  };
 
   return (
     <div className="min-h-screen bg-gray-300 flex justify-center items-center p-8">
@@ -93,7 +104,7 @@ export default function Recapitulatifdesoeufs() {
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white bg-opacity-60 mt-8 p-8 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
+      <div className="relative bg-white bg-opacity-60 p-4 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
         <h1 className="text-3xl font-bold text-custom-gray1 mb-6 text-center">
           Fiche recapitulatif des oeufs de table.
         </h1>
@@ -105,60 +116,77 @@ export default function Recapitulatifdesoeufs() {
         {/* Service Request Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative mt-1">
-            <TbEggs className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black">Nombre d&apos;oeufs ramasser</p>
+            <TbEggs className="absolute top-[47px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Collectedeggs"
-              name="Collectedeggs"
-              value={formData.Collectedeggs}
+              id="OeufsCollects"
+              name="oeufs_collectes"
+              value={formData.oeufs_collectes}
               onChange={handleInputChange}
               placeholder={"Nombre d'oeufs ramasser"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div className="relative mt-1">
-            <GiDeadHead className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black">Nombre d&apos;oeufs casser</p>
+            <GiDeadHead className="absolute top-[49px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Brokeneggs"
-              name="Brokeneggs"
-              value={formData.Brokeneggs}
+              id="OeufsCasses"
+              name="oeufs_casses"
+              value={formData.oeufs_casses}
               onChange={handleInputChange}
               placeholder={"Nombre d'oeufs casser"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
           <div className="relative mt-1">
-            <TbEggs className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black">Nombre d&apos;oeufs restants</p>
+            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Remainingeggs"
-              name="Remainingeggs"
-              value={formData.Remainingeggs}
+              id="OeufsRestants"
+              name="oeufs_restants"
+              value={formData.oeufs_restants}
               onChange={handleInputChange}
               placeholder={"Nombre d'oeufs restants"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
           <div className="relative mt-1">
-            <TbEggs className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-900" />
+            <p className="ml-2 text-black">Nombre de plateaux</p>
+            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
             <input
               type="number"
-              id="Platenumber"
-              name="Platenumber"
-              value={formData.Platenumber}
+              id="Nombredeplateux"
+              name="nombre_de_plateaux"
+              value={formData.nombre_de_plateaux}
               onChange={handleInputChange}
               placeholder={"Nombre de plateaux"}
               required
+              onInvalid={(e) => {
+                setFrenchValidationMessage(e.currentTarget);
+              }}
               className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div>
+            <p className="ml-2 text-black">Ajouter un commentaire</p>
             <textarea
               id="Description"
               name="Description"
