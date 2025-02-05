@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { GiChicken } from "react-icons/gi";
 import { TbEggs } from "react-icons/tb";
@@ -12,6 +13,7 @@ type FormData = {
 };
 
 const Incubation = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     oeufs_incuber: "",
     oeufs_fertiliser: "",
@@ -95,6 +97,7 @@ const Incubation = () => {
           Description: "",
           Espece: "goliath",
         });
+        router.push("/chooseform");
         console.log("la forme envoyee:", formData);
       } else {
         const errorData = await response.json();

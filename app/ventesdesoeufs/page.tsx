@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { GiDeadHead } from "react-icons/gi";
 import { TbEggs } from "react-icons/tb";
@@ -12,6 +13,7 @@ type FormData = {
   Description: string;
 };
 export default function VentesDesOeufs() {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     nombre_de_plateaux: "",
     prix_unitaire: "",
@@ -83,6 +85,7 @@ export default function VentesDesOeufs() {
           montant_restant: "",
           Description: "",
         });
+        router.push("/chooseform");
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message || "something went wrong"}`);

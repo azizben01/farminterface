@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { GiChicken } from "react-icons/gi";
 import { TbEggs } from "react-icons/tb";
 import { GiDeadHead } from "react-icons/gi";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   Poussins_Recus: number | string; // Allow string during input
@@ -13,6 +14,7 @@ type FormData = {
 };
 
 const Poussinprod = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     Poussins_Recus: "",
     Poussins_Perdus: "",
@@ -85,6 +87,7 @@ const Poussinprod = () => {
           Oeufs_Non_Eclos: "",
           Description: "",
         });
+        router.push("/chooseform");
         console.log("la forme envoyee:", formData);
       } else {
         const errorData = await response.json();

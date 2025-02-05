@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { GiMoneyStack } from "react-icons/gi";
 import { GoNumber } from "react-icons/go";
@@ -11,6 +12,7 @@ type FormData = {
 };
 
 export default function VentesDeLaFerme() {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     Quantite: "",
     Prix_Unitaire: "",
@@ -76,6 +78,7 @@ export default function VentesDeLaFerme() {
           Montant_Total: "",
           Description: "",
         });
+        router.push("/chooseform");
         console.log("la forme envoyee:", formData);
       } else {
         const errorData = await response.json();

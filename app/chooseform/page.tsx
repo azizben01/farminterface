@@ -1,6 +1,18 @@
+"use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Chooseform = () => {
+  const router = useRouter();
+  const handleBackClick = () => {
+    router.push("/");
+  };
+  <button
+    onClick={handleBackClick}
+    className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
+  >
+    Retour
+  </button>;
   return (
     <main className="h-screen container mx-auto flex flex-col justify-center items-center text-center">
       <div
@@ -53,6 +65,12 @@ const Chooseform = () => {
             Les ventes de la ferme
           </Link>
         </div>
+        <button
+          onClick={handleBackClick}
+          className="relative mb-4 px-4 py-2 bg-gray-700 text-white rounded-lg shadow hover:bg-gray-800 transition"
+        >
+          Retour au menu principal
+        </button>
       </div>
     </main>
   );

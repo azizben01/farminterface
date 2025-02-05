@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { GoNumber } from "react-icons/go";
 import { GiMoneyStack } from "react-icons/gi";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   Quantite: number | string;
@@ -10,6 +11,7 @@ type FormData = {
   Description: string;
 };
 const Besoins = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     Quantite: "",
     Prix_Unitaire: "",
@@ -68,6 +70,7 @@ const Besoins = () => {
           Montant_Total: "",
           Description: "",
         });
+        router.push("/chooseform");
         console.log("la forme:", formData);
       } else {
         const errorData = await response.json();

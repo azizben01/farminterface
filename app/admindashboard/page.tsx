@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { FaTrash } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useRouter } from "next/navigation";
 
 interface DataItem {
   id: number;
@@ -16,6 +17,7 @@ const AdminDashboard = () => {
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [data, setData] = useState<DataItem[]>([]);
   const [columns, setColumns] = useState<string[]>([]);
+  const router = useRouter();
 
   // Map of forms to their respective endpoints and columns
   const formConfig: { [key: string]: { endpoint: string; columns: string[] } } =
@@ -126,8 +128,18 @@ const AdminDashboard = () => {
     setData(data.filter((item) => item.id !== id));
   };
 
+  const handleBackClick = () => {
+    router.push("/");
+  };
+
   return (
     <main className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+      <button
+        onClick={handleBackClick}
+        className="relative mb-4 px-4 py-2 bg-gray-700 text-white rounded-lg shadow hover:bg-gray-800 transition"
+      >
+        Retour au menu principal
+      </button>
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
         Tableau de bord administrateur
       </h1>
@@ -196,7 +208,7 @@ const AdminDashboard = () => {
                     <p className="text-sm font-medium text-gray-500 uppercase">
                       {col}
                     </p>
-                    <p className="text-lg font-semibold text-blue-700">
+                    <p className="text-lg font-semibold text-custom-green">
                       {item[col]}
                     </p>
                   </div>

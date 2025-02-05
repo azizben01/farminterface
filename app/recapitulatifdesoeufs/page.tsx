@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { GiDeadHead } from "react-icons/gi";
 import { TbEggs } from "react-icons/tb";
@@ -11,6 +12,7 @@ type FormData = {
   Description: string;
 };
 export default function Recapitulatifdesoeufs() {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     oeufs_collectes: "",
     oeufs_casses: "",
@@ -78,6 +80,7 @@ export default function Recapitulatifdesoeufs() {
           nombre_de_plateaux: "",
           Description: "",
         });
+        router.push("/chooseform");
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message || "something went wrong"}`);

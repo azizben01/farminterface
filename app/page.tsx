@@ -25,8 +25,15 @@ const Home = () => {
         </Link>
 
         <Link
+          href="/checkdates"
+          className="bg-gray-700 text-white px-6 py-3 rounded-2xl text-lg sm:text-xl md:text-2xl lg:text-xl hover:bg-gray-700 transition duration-300"
+        >
+          Verifier les dates a venir
+        </Link>
+
+        <Link
           href="/adminlogin"
-          className="bg-custom-hover text-white px-6 py-3 rounded-2xl text-lg sm:text-xl md:text-2xl lg:text-xl hover:bg-gray-700 transition duration-300"
+          className="bg-gray-600 text-white px-6 py-3 rounded-2xl text-lg sm:text-xl md:text-2xl lg:text-xl hover:bg-gray-700 transition duration-300"
         >
           Se connecter comme Administrateur
         </Link>
