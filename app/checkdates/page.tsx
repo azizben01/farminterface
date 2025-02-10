@@ -47,7 +47,7 @@ export default function Checkdates() {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
-        Suivit des dates d'incubation des Œufs
+        Suivit des dates d&apos;incubation des Œufs
       </h1>
       <button
         onClick={handleBackClick}
