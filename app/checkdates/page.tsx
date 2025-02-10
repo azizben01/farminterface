@@ -23,7 +23,7 @@ export default function Checkdates() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch("http://192.168.1.4:5050/eggincubation") // Replace with your API endpoint
+    fetch("http://192.168.1.3:5050/eggincubation") // Replace with your API endpoint
       .then((response) => response.json())
       .then((data) => {
         const currentDate = new Date();
@@ -76,7 +76,7 @@ export default function Checkdates() {
               <br />
               <p className="text-sm text-custom-red">
                 Considérer les dates suivantes à venir (format:
-                mois/jour/année):
+                jour/mois/année):
               </p>
               {/* <p className="text-gray-600">Description: {record.description}</p> */}
               <div className="mt-4 text-sm text-gray-700">
@@ -96,17 +96,17 @@ export default function Checkdates() {
                 </p>
                 <br />
                 <p>
-                  Date d&apos;éclosion:{" "}
-                  {new Date(record.date_eclosion).toLocaleDateString()}
-                </p>
-                <br />
-                <p>
                   Date de mise en éclosoir:{" "}
                   {new Date(record.mise_en_closoir).toLocaleDateString()}
                 </p>
                 <br />
+                <p>
+                  Date d&apos;éclosion:{" "}
+                  {new Date(record.date_eclosion).toLocaleDateString()}
+                </p>
+                <br />
 
-                <p>Id: {record.id}</p>
+                <p>Lot numero: {record.id}</p>
                 <br />
               </div>
             </div>

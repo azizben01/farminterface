@@ -80,7 +80,7 @@ const Incubation = () => {
       espece: formData.Espece,
     };
     try {
-      const response = await fetch("http://192.168.1.4:5050/eggincubation", {
+      const response = await fetch("http://192.168.1.3:5050/eggincubation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
