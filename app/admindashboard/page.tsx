@@ -23,7 +23,7 @@ const AdminDashboard = () => {
   const formConfig: { [key: string]: { endpoint: string; columns: string[] } } =
     {
       "Ventes des oeufs de table": {
-        endpoint: "http://fermeclement.kesug.com/eggsales",
+        endpoint: "https://fermeclement.site/eggsales",
         columns: [
           "nombre_de_plateaux",
           "prix_unitaire",
@@ -36,7 +36,7 @@ const AdminDashboard = () => {
         ],
       },
       "Suivis de mise en incubation": {
-        endpoint: "http://fermeclement.kesug.com/eggincubation",
+        endpoint: "https://fermeclement.site/eggincubation",
         columns: [
           "espece",
           "date_incubation",
@@ -51,7 +51,7 @@ const AdminDashboard = () => {
         ],
       },
       "Oeufs de table par semaine": {
-        endpoint: "http://fermeclement.kesug.com/tableeggs",
+        endpoint: "https://fermeclement.site/tableeggs",
         columns: [
           "oeufs_collectes",
           "oeufs_casses",
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
         ],
       },
       "Besoins de la ferme": {
-        endpoint: "http://fermeclement.kesug.com/farmneeds",
+        endpoint: "https://fermeclement.site/farmneeds",
         columns: [
           "quantite",
           "prix_unitaire",
@@ -74,7 +74,7 @@ const AdminDashboard = () => {
         ],
       },
       "Production des poussins": {
-        endpoint: "http://fermeclement.kesug.com/chickproduction",
+        endpoint: "https://fermeclement.site/chickproduction",
         columns: [
           "poussins_recus",
           "poussins_perdus",
@@ -86,7 +86,7 @@ const AdminDashboard = () => {
         ],
       },
       "Ventes de la ferme": {
-        endpoint: "http://fermeclement.kesug.com/farmsellings",
+        endpoint: "https://fermeclement.site/farmsellings",
         columns: [
           "quantite",
           "prix_unitaire",

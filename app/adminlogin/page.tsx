@@ -14,7 +14,7 @@ const Adminlogin = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://195.35.28.233:5050/adminlogin", {
+      const response = await fetch("https://fermeclement.site/adminlogin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

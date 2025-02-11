@@ -68,7 +68,7 @@ export default function VentesDesOeufs() {
           : parseInt(formData.montant_restant as string),
     };
     try {
-      const response = await fetch("http://195.35.28.233:5050/eggsales", {
+      const response = await fetch("https://fermeclement.site/eggsales", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
