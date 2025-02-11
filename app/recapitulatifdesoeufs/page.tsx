@@ -64,7 +64,7 @@ export default function Recapitulatifdesoeufs() {
           : parseInt(formData.nombre_de_plateaux as string),
     };
     try {
-      const response = await fetch("https://fermeclement.site/tableeggs", {
+      const response = await fetch("https://fermeclement.site/api/tableeggs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

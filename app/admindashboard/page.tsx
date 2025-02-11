@@ -23,7 +23,7 @@ const AdminDashboard = () => {
   const formConfig: { [key: string]: { endpoint: string; columns: string[] } } =
     {
       "Ventes des oeufs de table": {
-        endpoint: "https://fermeclement.site/eggsales",
+        endpoint: "https://fermeclement.site/api/eggsales",
         columns: [
           "nombre_de_plateaux",
           "prix_unitaire",
@@ -36,7 +36,7 @@ const AdminDashboard = () => {
         ],
       },
       "Suivis de mise en incubation": {
-        endpoint: "https://fermeclement.site/eggincubation",
+        endpoint: "https://fermeclement.site/api/eggincubation",
         columns: [
           "espece",
           "date_incubation",
@@ -51,7 +51,7 @@ const AdminDashboard = () => {
         ],
       },
       "Oeufs de table par semaine": {
-        endpoint: "https://fermeclement.site/tableeggs",
+        endpoint: "https://fermeclement.site/api/tableeggs",
         columns: [
           "oeufs_collectes",
           "oeufs_casses",
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
         ],
       },
       "Besoins de la ferme": {
-        endpoint: "https://fermeclement.site/farmneeds",
+        endpoint: "https://fermeclement.site/api/farmneeds",
         columns: [
           "quantite",
           "prix_unitaire",
@@ -74,7 +74,7 @@ const AdminDashboard = () => {
         ],
       },
       "Production des poussins": {
-        endpoint: "https://fermeclement.site/chickproduction",
+        endpoint: "https://fermeclement.site/api/chickproduction",
         columns: [
           "poussins_recus",
           "poussins_perdus",
@@ -86,7 +86,7 @@ const AdminDashboard = () => {
         ],
       },
       "Ventes de la ferme": {
-        endpoint: "https://fermeclement.site/farmsellings",
+        endpoint: "https://fermeclement.site/api/farmsellings",
         columns: [
           "quantite",
           "prix_unitaire",

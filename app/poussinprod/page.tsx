@@ -68,7 +68,7 @@ const Poussinprod = () => {
 
     try {
       const response = await fetch(
-        "https://fermeclement.site/chickproductionform",
+        "https://fermeclement.site/api/chickproductionform",
         {
           method: "POST",
           headers: {

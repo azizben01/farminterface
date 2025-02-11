@@ -62,13 +62,16 @@ export default function VentesDeLaFerme() {
     console.log("Payload sent to API:", dataToSend); // Debugging step
 
     try {
-      const response = await fetch("https://fermeclement.site/farmsellings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const response = await fetch(
+        "https://fermeclement.site/api/farmsellings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
 
       if (response.ok) {
         alert("La fiche a bien été envoyée !");

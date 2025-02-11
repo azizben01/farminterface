@@ -23,7 +23,7 @@ export default function Checkdates() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch("https://fermeclement.site/eggincubation") // Replace with your API endpoint
+    fetch("https://fermeclement.site/api/eggincubation") // Replace with your API endpoint
       .then((response) => response.json())
       .then((data) => {
         const currentDate = new Date();

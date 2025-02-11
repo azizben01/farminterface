@@ -80,13 +80,16 @@ const Incubation = () => {
       espece: formData.Espece,
     };
     try {
-      const response = await fetch("https://fermeclement.site/eggincubation", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const response = await fetch(
+        "https://fermeclement.site/api/eggincubation",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
 
       if (response.ok) {
         alert("La fiche a bien été envoyée!");

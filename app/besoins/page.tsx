@@ -55,7 +55,7 @@ const Besoins = () => {
     };
 
     try {
-      const response = await fetch("https://fermeclement.site/farmneeds", {
+      const response = await fetch("https://fermeclement.site/api/farmneeds", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

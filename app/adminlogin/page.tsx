@@ -14,7 +14,7 @@ const Adminlogin = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://fermeclement.site/adminlogin", {
+      const response = await fetch("https://fermeclement.site/api/adminlogin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
