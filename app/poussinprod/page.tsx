@@ -68,7 +68,7 @@ const Poussinprod = () => {
 
     try {
       const response = await fetch(
-        "http://192.168.1.4:5050/chickproductionform",
+        "http://195.35.28.233:5050/chickproductionform",
         {
           method: "POST",
           headers: {

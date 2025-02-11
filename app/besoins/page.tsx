@@ -55,7 +55,7 @@ const Besoins = () => {
     };
 
     try {
-      const response = await fetch("http://192.168.1.4:5050/farmneeds", {
+      const response = await fetch("http://195.35.28.233:5050/farmneeds", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

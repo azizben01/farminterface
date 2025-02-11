@@ -64,7 +64,7 @@ export default function Recapitulatifdesoeufs() {
           : parseInt(formData.nombre_de_plateaux as string),
     };
     try {
-      const response = await fetch("http://192.168.1.4:5050/tableeggs", {
+      const response = await fetch("http://195.35.28.233:5050/tableeggs", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
