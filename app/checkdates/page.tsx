@@ -27,7 +27,7 @@ export default function Checkdates() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched Data:", data); // Debugging
-        const currentDate = new Date();
+        // const currentDate = new Date();
         console.log("Current Date:", new Date().toISOString());
 
         // Check if data is an object instead of an array
