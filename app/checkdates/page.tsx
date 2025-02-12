@@ -98,19 +98,36 @@ export default function Checkdates() {
               </p>{" "}
               <br />
               <p className="text-sm text-custom-red">
-                Considérer les dates suivantes à venir (format:
-                jour/mois/année):
+                Considérer les dates suivantes à venir :
               </p>
               <div className="mt-4 text-sm text-gray-700">
-                <p>
+                {/* <p>
                   Date d&apos;incubation:{" "}
                   {new Date(record.date_incubation).toLocaleDateString()}
-                </p>
+                </p> */}
                 <br />
-                <p>
+                {/* <p>
                   Date de Mirage:{" "}
                   {new Date(record.date_mirage).toLocaleDateString()}
+                </p> */}
+                <p>
+                  Date de Mirage:{" "}
+                  {(() => {
+                    const [day, month, yearTime] =
+                      record.date_mirage.split("-");
+                    if (!yearTime) return "Date invalide"; // Prevent error if format is wrong
+
+                    const [year, time] = yearTime.split(" ");
+                    const formattedDate = new Date(
+                      `${year}-${month}-${day}T${time}`
+                    );
+
+                    return isNaN(formattedDate.getTime())
+                      ? "Date invalide"
+                      : formattedDate.toLocaleDateString();
+                  })()}
                 </p>
+
                 <br />
                 <p>
                   Date de mise en éclosoir:{" "}
