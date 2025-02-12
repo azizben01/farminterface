@@ -40,9 +40,12 @@ export default function Checkdates() {
         }
 
         // Filter out records where date_eclosion has passed
-        const filteredData = records.filter(
-          (item: IncubationOeufs) => new Date(item.date_eclosion) >= currentDate
-        );
+        const filteredData = data.filter((item: IncubationOeufs) => {
+          const [day, month, yearTime] = item.date_eclosion.split("-");
+          const [year, time] = yearTime.split(" ");
+          const formattedDate = new Date(`${year}-${month}-${day}T${time}`);
+          return formattedDate >= new Date();
+        });
 
         setData(filteredData);
       })
