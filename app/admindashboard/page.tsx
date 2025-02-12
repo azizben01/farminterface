@@ -37,7 +37,7 @@ const AdminDashboard = () => {
         ],
       },
       "Suivis de mise en incubation": {
-        endpoint: "https://fermeclement.site/api/eggincubation",
+        endpoint: "https://fermeclement.site/api/geteggincubation",
         columns: [
           "espece",
           "date_incubation",
