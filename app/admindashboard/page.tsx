@@ -114,11 +114,19 @@ const AdminDashboard = () => {
 
       setLoading(true); // Set loading to true before fetching data
       console.log(`Fetching data from ${url} for ${selectedForm}`);
+
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
           console.log("Fetched data:", data);
-          setData(data);
+
+          // Ensure `data` is always an array
+          if (!Array.isArray(data)) {
+            setData([]); // If the response is null, undefined, or not an array, set an empty array
+          } else {
+            setData(data);
+          }
+
           setColumns(columns);
         })
         .catch((error) => {
