@@ -14,16 +14,13 @@ const Verifycode: React.FC = () => {
     setError("");
 
     try {
-      const response = await fetch(
-        "https://homeabomolawfirmltd.com/api/Verifycode",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ code }),
-        }
-      );
+      const response = await fetch("https://fermeclement.com/api/Verifycode", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ code }),
+      });
 
       const data = await response.json();
 
@@ -44,7 +41,7 @@ const Verifycode: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-garamond text-goldcolor font-bold mb-6 text-center">
+        <h1 className="text-2xl font-garamond text-custom-green font-bold mb-6 text-center">
           Saisissez le code envoyé sur votre adresse email.
         </h1>
         <form onSubmit={handleSubmit}>
@@ -68,7 +65,7 @@ const Verifycode: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full font-sans1 text-goldcolor border border-goldcolor py-1 px-2 rounded-xl hover:bg-goldcolor hover:text-white"
+            className="w-full font-sans1 text-custom-green border border-custom-green py-1 px-2 rounded-xl hover:bg-custom-green hover:text-white"
           >
             {isLoading ? "Verificaiton en cours..." : "Verifier      le code"}
           </button>

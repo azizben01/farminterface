@@ -35,27 +35,35 @@ export default function Checkdates() {
 
         if (!Array.isArray(records)) {
           console.error("Unexpected data format:", data);
-          setLoading(false);
+          setLoading(false); // Ensure loading is set to false
           return;
         }
+
         // Filter out records where date_eclosion has passed
-        const filteredData = data.filter(
+        const filteredData = records.filter(
           (item: IncubationOeufs) => new Date(item.date_eclosion) >= currentDate
         );
 
         setData(filteredData);
-        setLoading(false);
       })
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      })
+      .finally(() => {
+        setLoading(false); // Ensure loading is set to false regardless of success or failure
+      });
   }, []);
+
   const handleBackClick = () => {
     router.push("/");
   };
+
   if (loading) {
     return (
       <div className="text-center text-gray-600">Chargement des données...</div>
     );
   }
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
@@ -90,13 +98,7 @@ export default function Checkdates() {
                 Considérer les dates suivantes à venir (format:
                 jour/mois/année):
               </p>
-              {/* <p className="text-gray-600">Description: {record.description}</p> */}
               <div className="mt-4 text-sm text-gray-700">
-                {/* <p>Nombre d'œufs à incuber: {record.oeufs_incuber}</p> <br />
-                <p>Nombre d'œufs fécondés: {record.oeufs_fertiliser}</p>
-                <br />
-                <p>Nombre d'œufs non fécondés: {record.oeufs_non_fertiliser}</p>
-                <br /> */}
                 <p>
                   Date d&apos;incubation:{" "}
                   {new Date(record.date_incubation).toLocaleDateString()}
@@ -117,7 +119,6 @@ export default function Checkdates() {
                   {new Date(record.date_eclosion).toLocaleDateString()}
                 </p>
                 <br />
-
                 <p>Lot numero: {record.id}</p>
                 <br />
               </div>

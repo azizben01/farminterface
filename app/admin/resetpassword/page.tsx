@@ -16,6 +16,9 @@ const ResetPassword: React.FC = () => {
       setEmail(storedEmail);
     } else {
       // Redirect to the email verification page if no email is found
+      alert(
+        "Nous n'avons pas trouver votre addresse email dans le processus. Veuillez entrer votre email a nouveau."
+      );
       router.push("/admin/verifycode");
     }
   }, [router]);
@@ -27,7 +30,7 @@ const ResetPassword: React.FC = () => {
 
     try {
       const response = await fetch(
-        "https://homeabomolawfirmltd.com/api/resetpassword",
+        "https://fermeclement.com/api/resetpassword",
         {
           method: "POST",
           headers: {
@@ -57,7 +60,7 @@ const ResetPassword: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-garamond text-goldcolor font-bold mb-6 text-center">
+        <h1 className="text-2xl font-garamond text-custom-green font-bold mb-6 text-center">
           Réinitialiser votre mot de passe
         </h1>
         <form onSubmit={handleSubmit}>
@@ -81,7 +84,7 @@ const ResetPassword: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full font-sans1 text-goldcolor border border-goldcolor py-1 px-2 rounded-xl hover:bg-goldcolor hover:text-white"
+            className="w-full font-sans1 text-custom-green border border-custom-green py-1 px-2 rounded-xl hover:bg-custom-green hover:text-white"
           >
             {isLoading
               ? "Réinitialisation en cours..."

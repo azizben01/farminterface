@@ -17,6 +17,7 @@ const AdminDashboard = () => {
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [data, setData] = useState<DataItem[]>([]);
   const [columns, setColumns] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false); // Add loading state
   const router = useRouter();
 
   // Map of forms to their respective endpoints and columns
@@ -111,6 +112,7 @@ const AdminDashboard = () => {
         url += `?startDate=${start}&endDate=${end}`;
       }
 
+      setLoading(true); // Set loading to true before fetching data
       console.log(`Fetching data from ${url} for ${selectedForm}`);
       fetch(url)
         .then((response) => response.json())
@@ -119,7 +121,13 @@ const AdminDashboard = () => {
           setData(data);
           setColumns(columns);
         })
-        .catch((error) => console.error("Error fetching data:", error));
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          setData([]); // Reset data in case of error
+        })
+        .finally(() => {
+          setLoading(false); // Set loading to false after fetching data
+        });
     }
   }, [selectedForm, startDate, endDate]);
 
@@ -188,13 +196,17 @@ const AdminDashboard = () => {
       </div>
 
       {/* Data Display Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {data.length === 0 ? (
-          <div className="col-span-full bg-white p-6 rounded-xl shadow-sm text-center text-gray-500 text-lg">
-            Aucun enregistrement trouvé.
-          </div>
-        ) : (
-          data.map((item) => (
+      {loading ? (
+        <div className="text-center text-gray-600">
+          Chargement des données...
+        </div>
+      ) : data.length === 0 ? (
+        <div className="col-span-full bg-white p-6 rounded-xl shadow-sm text-center text-gray-500 text-lg">
+          Aucun enregistrement trouvé.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {data.map((item) => (
             <div
               key={`card-${item.id}`}
               className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow border-l-4 border-blue-500"
@@ -223,11 +235,10 @@ const AdminDashboard = () => {
                 </button>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </main>
   );
 };
-
 export default AdminDashboard;
