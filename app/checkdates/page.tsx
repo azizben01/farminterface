@@ -26,11 +26,23 @@ export default function Checkdates() {
     fetch("https://fermeclement.site/api/eggincubation") // Replace with your API endpoint
       .then((response) => response.json())
       .then((data) => {
+        console.log("Fetched Data:", data); // Debugging
         const currentDate = new Date();
+        console.log("Current Date:", new Date().toISOString());
+
+        // Check if data is an object instead of an array
+        const records = Array.isArray(data) ? data : data.records;
+
+        if (!Array.isArray(records)) {
+          console.error("Unexpected data format:", data);
+          setLoading(false);
+          return;
+        }
         // Filter out records where date_eclosion has passed
         const filteredData = data.filter(
           (item: IncubationOeufs) => new Date(item.date_eclosion) >= currentDate
         );
+
         setData(filteredData);
         setLoading(false);
       })

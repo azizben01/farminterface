@@ -114,7 +114,7 @@ const Adminlogin = () => {
         <p className="text-gray-400 text-sm text-center mt-6">
           Mot de passe oublier ?
           <a
-            href="#"
+            href="/admin/requestemailcode"
             className="text-gray-200 hover:text-gray-100 underline transition"
           >
             Changez le ici

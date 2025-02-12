@@ -15,7 +15,7 @@ export default {
         "dashboard-color": "#B58863",
         "custom-hover": "#373B4D",
         "custom-bg": "#676f9d",
-        "custom-green": "#0A5C36",
+        "custom-green": "#0D5B11",
         "custom-yellow": "#FFDA03",
         "custom-red": "#E70000",
       },

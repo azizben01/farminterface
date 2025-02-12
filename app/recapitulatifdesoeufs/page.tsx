@@ -135,7 +135,7 @@ export default function Recapitulatifdesoeufs() {
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
               }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="bg-white text-gray-900 bg-opacity-80 pl-10 lg:pl-10 md:pl-10 sm:pl-10 mt-1 block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
@@ -155,7 +155,7 @@ export default function Recapitulatifdesoeufs() {
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
               }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="bg-white text-gray-900 bg-opacity-80 pl-10 lg:pl-10 md:pl-10 sm:pl-10 mt-1 block w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
@@ -175,7 +175,7 @@ export default function Recapitulatifdesoeufs() {
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
               }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-3 sm:px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="bg-white text-gray-900 bg-opacity-80 pl-10 lg:pl-10 md:pl-10 sm:pl-10 border border-gray-300 w-full px-3 sm:px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
@@ -195,7 +195,7 @@ export default function Recapitulatifdesoeufs() {
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
               }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-3 sm:px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="bg-white text-gray-900 bg-opacity-80 pl-10 lg:pl-10 md:pl-10 sm:pl-10 border border-gray-300 w-full px-3 sm:px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
             />
           </div>
 

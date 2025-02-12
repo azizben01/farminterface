@@ -34,7 +34,9 @@ const Incubation = () => {
       [name]:
         name === "Espece" || name === "Description"
           ? value
-          : parseInt(value, 10) || "",
+          : value
+          ? parseInt(value, 10)
+          : "",
     }));
     // Set custom validation message in French
     if (event.target.validity.valueMissing) {
