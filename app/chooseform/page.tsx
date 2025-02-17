@@ -29,45 +29,45 @@ const Chooseform = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-6 w-full text-xl">
           <Link
-            href="/poussinprod"
-            className="flex items-center justify-center bg-custom-green text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-custom-hover hover:text-white hover:shadow-lg transition-all"
-          >
-            La production des poussins
-          </Link>
-          <Link
             href="/incubation"
-            className="flex items-center justify-center bg-custom-yellow text-black font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-custom-hover hover:text-white hover:shadow-lg transition-all"
+            className="flex items-center justify-center bg-custom-green text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-custom-green hover:shadow-lg transition-all"
           >
             Incubation des oeufs
           </Link>
           <Link
+            href="/poussinprod"
+            className="flex items-center justify-center bg-custom-yellow text-black font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-black   hover:shadow-lg transition-all"
+          >
+            La production des poussins
+          </Link>
+          <Link
             href="/ventesdesoeufs"
-            className="flex items-center justify-center bg-custom-red text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-custom-hover hover:text-white hover:shadow-lg transition-all"
+            className="flex items-center justify-center bg-custom-red text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-custom-red hover:shadow-lg transition-all"
           >
             Le récapitulatif de vente des oeufs
           </Link>
           <Link
             href="/besoins"
-            className="flex items-center justify-center bg-custom-red text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-custom-hover hover:text-white hover:shadow-lg transition-all"
+            className="flex items-center justify-center bg-custom-red text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-custom-red hover:shadow-lg transition-all"
           >
             Les besoins de la ferme
           </Link>
           <Link
             href="/recapitulatifdesoeufs"
-            className="flex items-center justify-center bg-custom-green text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-custom-hover hover:text-white hover:shadow-lg transition-all"
+            className="flex items-center justify-center bg-custom-green text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-custom-green hover:shadow-lg transition-all"
           >
             Le récapitulatif des oeufs de table
           </Link>
           <Link
             href="/ventesdelaferme"
-            className="flex items-center justify-center bg-custom-yellow text-black font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-custom-hover hover:text-white hover:shadow-lg transition-all"
+            className="flex items-center justify-center bg-custom-yellow text-black font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-black hover:shadow-lg transition-all"
           >
             Les ventes de la ferme
           </Link>
         </div>
         <button
           onClick={handleBackClick}
-          className="relative mt-10 px-4 py-2 bg-black text-white text-lg rounded-lg shadow hover:bg-gray-800 transition"
+          className="relative mt-10 px-4 py-2 bg-white font-bold text-custom-button text-lg rounded-lg shadow hover:bg-white hover:text-custom-button transition"
         >
           Retour au menu principal
         </button>

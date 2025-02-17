@@ -18,6 +18,8 @@ export default {
         "custom-green": "#0D5B11",
         "custom-yellow": "#FFDA03",
         "custom-red": "#E70000",
+        "custom-button": "#2E4E3A",
+        "custom-beige": "#F5F5DC",
       },
     },
     screens: {
