@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const Connexion = () => {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [MotDePasse, setMotDePasse] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
@@ -20,7 +20,7 @@ const Connexion = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, MotDePasse }),
       });
 
       if (!response.ok) {
@@ -66,8 +66,8 @@ const Connexion = () => {
           <input
             type="password"
             placeholder="Mot de passe"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={MotDePasse}
+            onChange={(e) => setMotDePasse(e.target.value)}
             className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
             required
           />

@@ -8,16 +8,16 @@ const Inscription = () => {
   const [username, setUsername] = useState("");
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
-  const [telephone, setTelephone] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [NumeroTelephone, setNumeroTelephone] = useState("");
+  const [MotDePasse, setMotDePasse] = useState("");
+  const [confirmMotDePasse, setConfirmMotDePasse] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
+    if (MotDePasse !== confirmMotDePasse) {
       setError("Les mots de passe ne correspondent pas.");
       return;
     }
@@ -31,7 +31,13 @@ const Inscription = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username, nom, prenom, telephone, password }),
+          body: JSON.stringify({
+            username,
+            nom,
+            prenom,
+            NumeroTelephone,
+            MotDePasse,
+          }),
         }
       );
 
@@ -134,10 +140,10 @@ const Inscription = () => {
             </label>
             <input
               type="tel"
-              id="telephone"
+              id="NumeroTelephone"
               placeholder="Numéro de téléphone"
-              value={telephone}
-              onChange={(e) => setTelephone(e.target.value)}
+              value={NumeroTelephone}
+              onChange={(e) => setNumeroTelephone(e.target.value)}
               className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
               required
             />
@@ -153,10 +159,10 @@ const Inscription = () => {
             </label>
             <input
               type="password"
-              id="password"
+              id="MotDePasse"
               placeholder="Nouveau mot de passe"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={MotDePasse}
+              onChange={(e) => setMotDePasse(e.target.value)}
               className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
               required
             />
@@ -171,11 +177,11 @@ const Inscription = () => {
               Confirmer mot de passe
             </label>
             <input
-              type="password"
-              id="confirmPassword"
+              type="MotDePasse"
+              id="confirmMotDePasse"
               placeholder="Confirmer mot de passe"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              value={confirmMotDePasse}
+              onChange={(e) => setConfirmMotDePasse(e.target.value)}
               className="w-full px-4 py-2 bg-gray-200 text-black rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
               required
             />
