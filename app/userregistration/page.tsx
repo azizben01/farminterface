@@ -24,13 +24,16 @@ const Inscription = () => {
 
     // Simulate registration API call
     try {
-      const response = await fetch("https://fermclement.site/userregister", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, nom, prenom, telephone, password }),
-      });
+      const response = await fetch(
+        "https://fermeclement.site/api/userregister",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, nom, prenom, telephone, password }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Erreur lors de l'inscription.");

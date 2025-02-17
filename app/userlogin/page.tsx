@@ -15,7 +15,7 @@ const Connexion = () => {
 
     // Simulate login API call
     try {
-      const response = await fetch("https://fermeclement.site/userlogin", {
+      const response = await fetch("https://fermeclement.site/api/userlogin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
