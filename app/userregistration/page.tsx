@@ -44,9 +44,11 @@ const Inscription = () => {
       if (!response.ok) {
         throw new Error("Erreur lors de l'inscription.");
       }
-
+      alert(
+        "Nouvel employé a été enregistrer. Vous serez rediriger sur la page de connexion maintenant!"
+      );
       // Redirect to login page after successful registration
-      router.push("/connexion");
+      router.push("/userlogin");
     } catch (err) {
       setError("Une erreur s'est produite. Veuillez réessayer.");
       console.error("Une erreur s'est produte. Veuillez réessayer:", err);
