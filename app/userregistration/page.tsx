@@ -40,6 +40,7 @@ const Inscription = () => {
       router.push("/connexion");
     } catch (err) {
       setError("Une erreur s'est produite. Veuillez réessayer.");
+      console.error("Une erreur s'est produte. Veuillez réessayer:", err);
     }
   };
 
@@ -57,7 +58,7 @@ const Inscription = () => {
       {/* Content */}
       <div className="relative bg-gray-100 bg-opacity-50 rounded-xl shadow-xl flex flex-col items-center justify-center w-11/12 sm:w-[600px] md:w-[700px] lg:w-[700px] xl:w-[800px] p-6 sm:p-8 md:p-10 lg:p-12">
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-extrabold text-custom-button">
-          Fiche D'inscription
+          Fiche D&apos;inscription
         </h1>
 
         {error && <p className="text-red-500">{error}</p>}
@@ -69,7 +70,7 @@ const Inscription = () => {
               htmlFor="username"
               className="block text-left text-black font-bold"
             >
-              Nom d'utilisateur
+              Nom d&apos;utilisateur
             </label>
             <input
               type="text"

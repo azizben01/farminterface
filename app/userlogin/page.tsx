@@ -31,6 +31,7 @@ const Connexion = () => {
       router.push("/");
     } catch (err) {
       setError("Nom d'utilisateur ou mot de passe incorrect.");
+      console.error("Nom d'utilisateur ou mot de passe incorrect:", err);
     }
   };
 
