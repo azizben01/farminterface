@@ -28,7 +28,7 @@ const Connexion = () => {
       }
 
       // Redirect to dashboard or home page after successful login
-      router.push("/");
+      router.push("/homepage");
     } catch (err) {
       setError("Nom d'utilisateur ou mot de passe incorrect.");
       console.error("Nom d'utilisateur ou mot de passe incorrect:", err);
