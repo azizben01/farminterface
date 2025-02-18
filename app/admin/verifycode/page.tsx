@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const Verifycode: React.FC = () => {
-  const [code, setCode] = useState<string>("");
+  const [code, setCode] = useState<number | "">(""); // Allow number or empty string
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const router = useRouter(); // Initialize the router instance
@@ -19,7 +19,7 @@ const Verifycode: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ code }),
+        body: JSON.stringify({ code: Number(code) }),
       });
 
       const data = await response.json();
@@ -27,7 +27,10 @@ const Verifycode: React.FC = () => {
       if (response.ok) {
         router.push("/admin/resetpassword");
       } else {
-        setError(data.error || "Échec de l'envoi du code de réinitialisation.");
+        setError(
+          data.error ||
+            "Le code est incorrect. Si le probleme persiste, contactez votre adminstrateur"
+        );
       }
     } catch (err) {
       setError(
@@ -57,7 +60,7 @@ const Verifycode: React.FC = () => {
               type="number"
               id="number"
               value={code}
-              onChange={(e) => setCode(e.target.value)}
+              onChange={(e) => setCode(Number(e.target.value))}
               className="mt-1 font-sans1 text-black block w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
               placeholder="Enter your code"
               required
