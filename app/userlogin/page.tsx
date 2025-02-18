@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { PiEyeSlash, PiEye } from "react-icons/pi";
 
 const Connexion = () => {
   const [username, setUsername] = useState("");
   const [MotDePasse, setMotDePasse] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,14 +66,27 @@ const Connexion = () => {
             className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
             required
           />
-          <input
-            type="password"
-            placeholder="Mot de passe"
-            value={MotDePasse}
-            onChange={(e) => setMotDePasse(e.target.value)}
-            className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
-            required
-          />
+          <div className="relative">
+            <input
+              type={passwordVisible ? "text" : "password"}
+              placeholder="Mot de passe"
+              value={MotDePasse}
+              onChange={(e) => setMotDePasse(e.target.value)}
+              className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+              className="absolute right-5 bottom-3 text-gray-800"
+            >
+              {passwordVisible ? (
+                <PiEyeSlash className="text-xl" />
+              ) : (
+                <PiEye className="text-xl" />
+              )}
+            </button>
+          </div>
           <button
             type="submit"
             className="w-full bg-custom-button text-white px-6 py-2 rounded-3xl font-bold sm:text-xl md:text-2xl lg:text-xl hover:bg-gray-200 hover:text-custom-button transition duration-300"

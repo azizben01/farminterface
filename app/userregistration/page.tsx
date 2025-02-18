@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { PiEye, PiEyeSlash } from "react-icons/pi";
 
 const Inscription = () => {
   const [username, setUsername] = useState("");
@@ -13,6 +14,7 @@ const Inscription = () => {
   const [confirmMotDePasse, setConfirmMotDePasse] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -152,7 +154,7 @@ const Inscription = () => {
           </div>
 
           {/* Password */}
-          <div className="space-y-1">
+          <div className="relative space-y-1">
             <label
               htmlFor="password"
               className="block text-left text-black font-bold"
@@ -160,7 +162,7 @@ const Inscription = () => {
               Nouveau mot de passe
             </label>
             <input
-              type="password"
+              type={passwordVisible ? "text" : "password"}
               id="MotDePasse"
               placeholder="Nouveau mot de passe"
               value={MotDePasse}
@@ -168,10 +170,21 @@ const Inscription = () => {
               className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
               required
             />
+            <button
+              type="button"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+              className="absolute right-5 bottom-3 text-gray-800"
+            >
+              {passwordVisible ? (
+                <PiEyeSlash className="text-xl" />
+              ) : (
+                <PiEye className="text-xl" />
+              )}
+            </button>
           </div>
 
           {/* Confirm Password */}
-          <div className="space-y-1">
+          <div className="relative space-y-1">
             <label
               htmlFor="confirmPassword"
               className="block text-left text-black font-bold"
@@ -179,7 +192,7 @@ const Inscription = () => {
               Confirmer mot de passe
             </label>
             <input
-              type="MotDePasse"
+              type={passwordVisible ? "text" : "password"}
               id="confirmMotDePasse"
               placeholder="Confirmer mot de passe"
               value={confirmMotDePasse}
@@ -187,6 +200,17 @@ const Inscription = () => {
               className="w-full px-4 py-2 bg-gray-200 text-black rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
               required
             />
+            <button
+              type="button"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+              className="absolute right-5 bottom-3 text-gray-800"
+            >
+              {passwordVisible ? (
+                <PiEyeSlash className="text-xl" />
+              ) : (
+                <PiEye className="text-xl" />
+              )}
+            </button>
           </div>
 
           {/* Submit Button */}
