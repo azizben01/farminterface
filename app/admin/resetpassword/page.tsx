@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
 const ResetPassword: React.FC = () => {
-  const [password, setPassword] = useState<string>("");
+  const [MotDePasse, setMotDePasse] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -36,7 +36,7 @@ const ResetPassword: React.FC = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify({ email, mot_de_passe: MotDePasse }),
         }
       );
 
@@ -74,8 +74,8 @@ const ResetPassword: React.FC = () => {
             <input
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={MotDePasse}
+              onChange={(e) => setMotDePasse(e.target.value)}
               className="mt-1 font-sans1 text-black block w-full px-3 py-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
               placeholder="Enter your new password"
               required
