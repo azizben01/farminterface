@@ -11,7 +11,7 @@ const ResetPassword: React.FC = () => {
 
   // Retrieve the email from session storage
   useEffect(() => {
-    const storedEmail = sessionStorage.getItem("resetEmail");
+    const storedEmail = sessionStorage.getItem("sessionEmail");
     if (storedEmail) {
       setEmail(storedEmail);
     } else {
@@ -30,7 +30,7 @@ const ResetPassword: React.FC = () => {
 
     try {
       const response = await fetch(
-        "https://fermeclement.com/api/resetpassword",
+        "https://fermeclement.site/api/resetpassword",
         {
           method: "POST",
           headers: {

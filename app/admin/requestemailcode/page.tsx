@@ -31,6 +31,7 @@ const EmailCode: React.FC = () => {
       try {
         const data = JSON.parse(text); // Try to parse JSON
         if (response.ok) {
+          sessionStorage.setItem("sessionEmail", data.email); // Assuming the backend returns the email
           router.push("/admin/verifycode");
         } else {
           setError(

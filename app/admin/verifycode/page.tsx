@@ -25,7 +25,6 @@ const Verifycode: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        sessionStorage.setItem("resetEmail", data.email); // Assuming the backend returns the email
         router.push("/admin/resetpassword");
       } else {
         setError(data.error || "Échec de l'envoi du code de réinitialisation.");
