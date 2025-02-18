@@ -45,7 +45,7 @@ const ResetPassword: React.FC = () => {
       if (response.ok) {
         // Clear the email from session storage after successful reset
         sessionStorage.removeItem("resetEmail");
-        router.push("/admin/login"); // Redirect to the login page
+        router.push("/adminlogin"); // Redirect to the login page
       } else {
         setError(data.error || "Échec de la réinitialisation du mot de passe.");
       }

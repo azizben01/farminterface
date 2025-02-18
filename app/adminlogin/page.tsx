@@ -19,7 +19,7 @@ const Adminlogin = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, MotDePasse }),
+        body: JSON.stringify({ email, mot_de_passe: MotDePasse }),
       });
 
       if (!response.ok) {
