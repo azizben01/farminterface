@@ -108,8 +108,8 @@ export default function Recapitulatifdesoeufs() {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
 
-      <div className="relative bg-white bg-opacity-60 p-2 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl w-full max-h-lg h-full">
-        <h1 className="text-2xl sm:text-3xl font-bold text-custom-gray1 mb-4 sm:mb-6 text-center">
+      <div className="relative bg-white p-2 sm:p-6 md:p-8 rounded-lg shadow-lg max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl w-full max-h-lg h-full">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 text-center">
           Fiche recapitulatif des oeufs de table.
         </h1>
         <p className="text-center text-black mb-4 sm:mb-8">
@@ -216,7 +216,7 @@ export default function Recapitulatifdesoeufs() {
 
           <button
             type="submit"
-            className="w-full bg-gray-900 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-800 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+            className="w-full bg-custom-green text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-custom-button hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
           >
             Enregister
           </button>

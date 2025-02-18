@@ -112,8 +112,8 @@ export default function VentesDesOeufs() {
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white bg-opacity-50 p-2 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
-        <h1 className="text-2xl font-bold text-custom-gray1 mb-4 text-center">
+      <div className="relative bg-white p-4 rounded-lg shadow-lg max-w-2xl w-full h-full">
+        <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
           Fiche recapitulatif de la vente des oeufs.
         </h1>
         <p className="text-center text-md text-black mb-8">
@@ -121,7 +121,7 @@ export default function VentesDesOeufs() {
         </p>
 
         {/* Service Request Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div className="relative mt-1">
             <p className="ml-2 text-black">Nombre de plateaux</p>
             <TbEggs className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
@@ -229,7 +229,7 @@ export default function VentesDesOeufs() {
           </div>
           <button
             type="submit"
-            className="w-full bg-gray-900 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-800 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+            className="w-full bg-custom-green text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-custom-button hover:text-white hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
           >
             Enregister
           </button>

@@ -110,8 +110,8 @@ export default function VentesDeLaFerme() {
 
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white bg-opacity-60 p-4 rounded-lg shadow-lg max-w-xl w-full max-h-lg h-full">
-        <h1 className="text-3xl font-bold text-custom-gray1 mb-3 text-center">
+      <div className="relative bg-white p-5 rounded-lg shadow-lg max-w-2xl w-full max-h-lg h-full">
+        <h1 className="text-3xl font-bold text-gray-800 mb-3 text-center">
           Fiche de vente de la ferme
         </h1>
         <p className="text-center text-black mb-4">
@@ -186,7 +186,7 @@ export default function VentesDeLaFerme() {
 
           <button
             type="submit"
-            className="w-full bg-gray-900 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-gray-800 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+            className="w-full bg-custom-green text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-custom-button hover:text-white hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
           >
             Enregistrer
           </button>

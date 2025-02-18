@@ -4,70 +4,95 @@ import { useRouter } from "next/navigation";
 
 const Chooseform = () => {
   const router = useRouter();
+
   const handleBackClick = () => {
-    router.push("/");
+    router.push("/homepage");
   };
-  <button
-    onClick={handleBackClick}
-    className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
-  >
-    Retour
-  </button>;
+
   return (
     <main className="h-screen container mx-auto flex flex-col justify-center items-center text-center">
+      {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center md:bg-fixed"
         style={{ backgroundImage: "url('/images/poussins.jpg')" }}
       />
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-gray-500 bg-opacity-70  rounded-xl w-full md:w-1/2 h-auto flex flex-col items-center justify-center shadow-xl py-12">
-        <h1 className="text-4xl font-bold mb-6 text-white">
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
+
+      {/* Content Container */}
+      <div className="relative bg-gray-100/90 rounded-xl w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 h-auto flex flex-col items-center justify-center shadow-2xl py-8 md:py-5 px-4 md:px-8">
+        {/* Page Title */}
+        <h1 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
           Choisissez une fiche à remplir
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-6 w-full text-xl">
-          <Link
-            href="/incubation"
-            className="flex items-center justify-center bg-custom-green text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-custom-green hover:shadow-lg transition-all"
-          >
-            Incubation des oeufs
-          </Link>
-          <Link
-            href="/poussinprod"
-            className="flex items-center justify-center bg-custom-yellow text-black font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-black   hover:shadow-lg transition-all"
-          >
-            La production des poussins
-          </Link>
-          <Link
-            href="/ventesdesoeufs"
-            className="flex items-center justify-center bg-custom-red text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-custom-red hover:shadow-lg transition-all"
-          >
-            Le récapitulatif de vente des oeufs
-          </Link>
-          <Link
-            href="/besoins"
-            className="flex items-center justify-center bg-custom-red text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-custom-red hover:shadow-lg transition-all"
-          >
-            Les besoins de la ferme
-          </Link>
-          <Link
-            href="/recapitulatifdesoeufs"
-            className="flex items-center justify-center bg-custom-green text-white font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-custom-green hover:shadow-lg transition-all"
-          >
-            Le récapitulatif des oeufs de table
-          </Link>
-          <Link
-            href="/ventesdelaferme"
-            className="flex items-center justify-center bg-custom-yellow text-black font-bold rounded-2xl text-center p-4 transform transition-transform duration-500 hover:scale-95 hover:bg-white hover:text-black hover:shadow-lg transition-all"
-          >
-            Les ventes de la ferme
-          </Link>
+        {/* Grid of Buttons */}
+        <div className="flex flex-col gap-4 w-full">
+          {[
+            {
+              href: "/incubation",
+              text: "Incubation des oeufs",
+              bgColor: "bg-custom-green",
+              hoverColor: "hover:bg-white",
+              textColor: "text-white",
+              hoverTextColor: "hover:text-custom-green",
+            },
+            {
+              href: "/poussinprod",
+              text: "La production des poussins",
+              bgColor: "bg-custom-yellow",
+              hoverColor: "hover:bg-white",
+              textColor: "text-black",
+              hoverTextColor: "hover:text-black",
+            },
+            {
+              href: "/ventesdesoeufs",
+              text: "Le récapitulatif de vente des oeufs",
+              bgColor: "bg-custom-red",
+              hoverColor: "hover:bg-white",
+              textColor: "text-white",
+              hoverTextColor: "hover:text-custom-red",
+            },
+            {
+              href: "/besoins",
+              text: "Les besoins de la ferme",
+              bgColor: "bg-custom-red",
+              hoverColor: "hover:bg-white",
+              textColor: "text-white",
+              hoverTextColor: "hover:text-custom-red",
+            },
+            {
+              href: "/recapitulatifdesoeufs",
+              text: "Le récapitulatif des oeufs de table",
+              bgColor: "bg-custom-green",
+              hoverColor: "hover:bg-white",
+              textColor: "text-white",
+              hoverTextColor: "hover:text-custom-green",
+            },
+            {
+              href: "/ventesdelaferme",
+              text: "Les ventes de la ferme",
+              bgColor: "bg-custom-yellow",
+              hoverColor: "hover:bg-white",
+              textColor: "text-black",
+              hoverTextColor: "hover:text-black",
+            },
+          ].map((button, index) => (
+            <Link
+              key={index}
+              href={button.href}
+              className={`flex items-center justify-center ${button.bgColor} ${button.textColor} font-semibold rounded-xl text-center p-2 transform transition-all duration-300 hover:scale-95 ${button.hoverColor} ${button.hoverTextColor} hover:shadow-lg`}
+            >
+              {button.text}
+            </Link>
+          ))}
         </div>
+
+        {/* Back Button */}
         <button
           onClick={handleBackClick}
-          className="relative mt-10 px-4 py-2 bg-white font-bold text-custom-button text-lg rounded-lg shadow hover:bg-white hover:text-custom-button transition"
+          className="mt-8 px-6 py-2 bg-white text-custom-button font-semibold text-lg rounded-xl shadow-md hover:bg-gray-200 hover:text-custom-button transition-all duration-300"
         >
           Retour au menu principal
         </button>

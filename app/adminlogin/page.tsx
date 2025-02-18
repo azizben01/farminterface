@@ -23,7 +23,7 @@ const Adminlogin = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Invalid credentials");
+        throw new Error("Mot de passe ou email non correcte!");
       }
 
       const data = await response.json();
@@ -33,13 +33,15 @@ const Adminlogin = () => {
         // Store the email or reset token in sessionStorage
         sessionStorage.setItem("loginEmail", data.email);
       } else {
-        setError("Invalid login. Please try again.");
+        setError(
+          "Une erreur s'est produite lors de la tentative de connexion. Veuillez réessayer!"
+        );
       }
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError("An unknown error has occurred");
+        setError("Erreur inconnue. Veuillez contacter votre administrateur!");
       }
     }
   };
@@ -56,11 +58,11 @@ const Adminlogin = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 opacity-80" />
 
       {/* Centered Login Card */}
-      <div className="relative flex flex-col justify-center items-center w-full max-w-lg bg-gray-800 bg-opacity-90 rounded-xl shadow-lg overflow-hidden p-6 lg:p-10">
-        <h2 className="text-3xl font-bold text-white text-center mb-4">
+      <div className="relative flex flex-col justify-center items-center w-full max-w-lg bg-white rounded-xl shadow-lg overflow-hidden p-6 lg:p-10">
+        <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
           Se connecter
         </h2>
-        <p className="text-gray-300 text-center mb-8">
+        <p className="text-gray-700 text-center mb-8">
           Entrez votre adresse e-mail et mot de passe pour vous connecter.
         </p>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
@@ -73,7 +75,7 @@ const Adminlogin = () => {
               placeholder="Adresse e-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 bg-gray-700 text-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
+              className="border border-gray-900 w-full px-4 py-2 bg-white text-black rounded-full transition duration-300"
               required
             />
           </div>
@@ -85,13 +87,13 @@ const Adminlogin = () => {
               placeholder="Mot de passe"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 bg-gray-700 text-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
+              className="border border-gray-900 w-full px-4 py-2 bg-white text-black rounded-full transition duration-300"
               required
             />
             <button
               type="button"
               onClick={() => setPasswordVisible(!passwordVisible)}
-              className="absolute inset-y-0 right-4 flex items-center text-gray-400 hover:text-gray-200"
+              className="absolute inset-y-0 right-4 flex items-center text-gray-800 hover:text-gray-200"
             >
               {passwordVisible ? (
                 <PiEyeSlash className="text-xl" />
@@ -104,18 +106,18 @@ const Adminlogin = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-gray-600 to-gray-500 text-white font-semibold py-2 rounded-full hover:from-gray-500 hover:to-gray-400 hover:shadow-md transition-transform transform duration-500 hover:scale-105"
+            className="w-full bg-custom-green text-white font-semibold py-2 rounded-full hover:bg-custom-button hover:text-white hover:shadow-md transition-transform transform duration-500 hover:scale-105"
           >
             Se connecter
           </button>
         </form>
 
         {/* Footer Section */}
-        <p className="text-gray-400 text-sm text-center mt-6">
+        <p className="text-gray-600 text-sm text-center mt-6">
           Mot de passe oublier ?
           <a
             href="/admin/requestemailcode"
-            className="text-gray-200 hover:text-gray-100 underline transition"
+            className="hover:text-gray-800 underline transition"
           >
             Changez le ici
           </a>
