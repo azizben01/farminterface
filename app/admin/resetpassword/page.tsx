@@ -13,6 +13,7 @@ const ResetPassword: React.FC = () => {
   useEffect(() => {
     const storedEmail = sessionStorage.getItem("sessionEmail");
     if (storedEmail) {
+      console.log("Retrieved email from sessionStorage:", storedEmail); // Debug log
       setEmail(storedEmail);
     } else {
       // Redirect to the email verification page if no email is found
@@ -28,6 +29,7 @@ const ResetPassword: React.FC = () => {
     setIsLoading(true);
     setError("");
 
+    console.log("Sending payload:", { email, mot_de_passe: MotDePasse }); // Debug log
     try {
       const response = await fetch(
         "https://fermeclement.site/api/resetpassword",

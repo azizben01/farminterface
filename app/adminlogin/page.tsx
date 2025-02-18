@@ -23,15 +23,15 @@ const Adminlogin = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Mot de passe ou email non correcte!");
+        throw new Error("Mot de passe ou email incorrecte!");
       }
 
       const data = await response.json();
 
       if (data.message === "Login successful") {
         router.push(`/admindashboard`);
-        // Store the email or reset token in sessionStorage
-        sessionStorage.setItem("loginEmail", data.email);
+        // // Store the email or reset token in sessionStorage
+        // sessionStorage.setItem("loginEmail", data.email);
       } else {
         setError(
           "Une erreur s'est produite lors de la tentative de connexion. Veuillez réessayer!"

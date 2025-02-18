@@ -145,7 +145,7 @@ const AdminDashboard = () => {
   };
 
   const handleBackClick = () => {
-    router.push("/");
+    router.push("/homepage");
   };
 
   return (
