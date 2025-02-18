@@ -5,7 +5,7 @@ import { PiEye, PiEyeSlash } from "react-icons/pi";
 
 const Adminlogin = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [MotDePasse, setMotDePasse] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -19,7 +19,7 @@ const Adminlogin = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, MotDePasse }),
       });
 
       if (!response.ok) {
@@ -85,8 +85,8 @@ const Adminlogin = () => {
             <input
               type={passwordVisible ? "text" : "password"}
               placeholder="Mot de passe"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={MotDePasse}
+              onChange={(e) => setMotDePasse(e.target.value)}
               className="border border-gray-900 w-full px-4 py-2 bg-white text-black rounded-full transition duration-300"
               required
             />

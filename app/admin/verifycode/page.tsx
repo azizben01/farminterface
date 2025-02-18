@@ -14,7 +14,7 @@ const Verifycode: React.FC = () => {
     setError("");
 
     try {
-      const response = await fetch("https://fermeclement.com/api/Verifycode", {
+      const response = await fetch("https://fermeclement.site/api/Verifycode", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +31,9 @@ const Verifycode: React.FC = () => {
         setError(data.error || "Échec de l'envoi du code de réinitialisation.");
       }
     } catch (err) {
-      setError("Une erreur s'est produite. Veuillez réessayer.");
+      setError(
+        "Une erreur s'est produite. Veuillez réessayer. Si le probleme persiste, contactez votre administrateur"
+      );
       console.error("une erreur s'est produite:", err);
     } finally {
       setIsLoading(false);
