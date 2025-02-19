@@ -147,7 +147,12 @@ const Inscription = () => {
               id="NumeroTelephone"
               placeholder="Numéro de téléphone"
               value={NumeroTelephone}
-              onChange={(e) => setNumeroTelephone(e.target.value)}
+              // onChange={(e) => setNumeroTelephone(e.target.value)}
+              onChange={(e) => {
+                // Allow only numeric input
+                const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-digits
+                setNumeroTelephone(numericValue);
+              }}
               className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"
               required
             />
