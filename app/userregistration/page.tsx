@@ -23,6 +23,16 @@ const Inscription = () => {
       setError("Les mots de passe ne correspondent pas.");
       return;
     }
+    // Log the data before sending the request
+    // const formData = {
+    //   username,
+    //   nom,
+    //   prenom,
+    //   NumeroTelephone,
+    //   MotDePasse,
+    // };
+
+    // console.log("Data being sent to backend:", formData);
 
     // Simulate registration API call
     try {
@@ -37,7 +47,7 @@ const Inscription = () => {
             username,
             nom,
             prenom,
-            NumeroTelephone,
+            numero_telephone: NumeroTelephone,
             MotDePasse,
           }),
         }
@@ -221,7 +231,7 @@ const Inscription = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-custom-button text-white px-6 py-2 rounded-3xl font-bold sm:text-xl md:text-2xl lg:text-xl hover:bg-gray-200 hover:text-custom-button transition duration-300"
+            className="w-full bg-custom-button text-white px-6 py-2 rounded-3xl font-bold sm:text-xl md:text-xl lg:text-xl hover:bg-gray-200 hover:text-custom-button transition duration-300"
           >
             S&apos;inscrire
           </button>

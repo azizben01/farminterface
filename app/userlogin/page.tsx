@@ -15,15 +15,26 @@ const Connexion = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const formData = {
+      username,
+      mot_de_passe: MotDePasse,
+    };
+
+    console.log("Data being sent to backend:", formData);
+
     // Simulate login API call
     try {
-      const response = await fetch("https://fermeclement.site/api/userlogin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, MotDePasse }),
-      });
+      const response = await fetch(
+        "https://fermeclement.site/api/userlogin",
+        //"http://192.168.1.228:5050/userlogin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, MotDePasse }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Nom d'utilisateur ou mot de passe incorrect.");
@@ -89,7 +100,7 @@ const Connexion = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-custom-button text-white px-6 py-2 rounded-3xl font-bold sm:text-xl md:text-2xl lg:text-xl hover:bg-gray-200 hover:text-custom-button transition duration-300"
+            className="w-full bg-custom-button text-white px-6 py-2 rounded-3xl font-bold sm:text-xl md:text-xl lg:text-xl hover:bg-gray-200 hover:text-custom-button transition duration-300"
           >
             Se connecter
           </button>
