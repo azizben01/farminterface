@@ -31,13 +31,6 @@ const Home = () => {
           >
             Verifier les dates a venir
           </Link>
-
-          <Link
-            href="/adminlogin"
-            className="bg-white text-custom-button py-2 px-4 rounded-2xl font-bold text-base sm:text-lg md:text-lg lg:text-xl hover:bg-custom-green hover:text-white focus:ring-2 focus:ring-custom-button focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105 shadow-lg text-center"
-          >
-            Se connecter comme Administrateur
-          </Link>
         </div>
       </div>
     </main>

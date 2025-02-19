@@ -88,7 +88,7 @@ const Inscription = () => {
             <input
               type="text"
               id="username"
-              placeholder="Nom d'utilisateur. Ex: felix87"
+              placeholder="Nom d'utilisateur. Ex: Felix06"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full px-4 py-2 bg-gray-200 text-gray-900 rounded-full focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300"

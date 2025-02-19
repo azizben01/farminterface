@@ -21,7 +21,7 @@ const Chooseform = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
 
       {/* Content Container */}
-      <div className="relative bg-gray-100/90 rounded-xl w-11/12 md:w-3/4 lg:w-2/3 xl:w-1/2 h-auto flex flex-col items-center justify-center shadow-2xl py-8 md:py-5 px-4 md:px-8">
+      <div className="relative bg-gray-100/90 rounded-xl w-11/12 md:w-3/4 lg:w-2/3 xl:w-3/2 h-auto flex flex-col items-center justify-center shadow-2xl py-8 md:py-5 px-4 md:px-8">
         {/* Page Title */}
         <h1 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
           Choisissez une fiche à remplir
@@ -33,56 +33,56 @@ const Chooseform = () => {
             {
               href: "/incubation",
               text: "Incubation des oeufs",
-              bgColor: "bg-custom-green",
-              hoverColor: "hover:bg-white",
-              textColor: "text-white",
-              hoverTextColor: "hover:text-custom-green",
+              bgColor: "bg-white",
+              hoverColor: "hover:bg-custom-green",
+              textColor: "text-custom-green",
+              hoverTextColor: "hover:text-white",
             },
             {
               href: "/poussinprod",
               text: "La production des poussins",
-              bgColor: "bg-custom-yellow",
-              hoverColor: "hover:bg-white",
-              textColor: "text-black",
+              bgColor: "bg-white",
+              hoverColor: "hover:bg-custom-yellow",
+              textColor: "text-custom-green",
               hoverTextColor: "hover:text-black",
             },
             {
               href: "/ventesdesoeufs",
               text: "Le récapitulatif de vente des oeufs",
-              bgColor: "bg-custom-red",
-              hoverColor: "hover:bg-white",
-              textColor: "text-white",
-              hoverTextColor: "hover:text-custom-red",
+              bgColor: "bg-white",
+              hoverColor: "hover:bg-custom-red",
+              textColor: "text-custom-green",
+              hoverTextColor: "hover:text-white",
             },
             {
               href: "/besoins",
               text: "Les besoins de la ferme",
-              bgColor: "bg-custom-red",
-              hoverColor: "hover:bg-white",
-              textColor: "text-white",
-              hoverTextColor: "hover:text-custom-red",
+              bgColor: "bg-white",
+              hoverColor: "hover:bg-custom-green",
+              textColor: "text-custom-green",
+              hoverTextColor: "hover:text-white",
             },
             {
               href: "/recapitulatifdesoeufs",
               text: "Le récapitulatif des oeufs de table",
-              bgColor: "bg-custom-green",
-              hoverColor: "hover:bg-white",
-              textColor: "text-white",
-              hoverTextColor: "hover:text-custom-green",
+              bgColor: "bg-white",
+              hoverColor: "hover:bg-custom-yellow",
+              textColor: "text-custom-green",
+              hoverTextColor: "hover:text-black",
             },
             {
               href: "/ventesdelaferme",
               text: "Les ventes de la ferme",
-              bgColor: "bg-custom-yellow",
-              hoverColor: "hover:bg-white",
-              textColor: "text-black",
-              hoverTextColor: "hover:text-black",
+              bgColor: "bg-white",
+              hoverColor: "hover:bg-custom-red",
+              textColor: "text-custom-green",
+              hoverTextColor: "hover:text-white",
             },
           ].map((button, index) => (
             <Link
               key={index}
               href={button.href}
-              className={`flex items-center justify-center ${button.bgColor} ${button.textColor} font-semibold rounded-xl text-center p-2 transform transition-all duration-300 hover:scale-95 ${button.hoverColor} ${button.hoverTextColor} hover:shadow-lg`}
+              className={`border border-custom-green flex items-center justify-center ${button.bgColor} ${button.textColor} font-semibold rounded-xl text-center p-2 transform transition-all duration-300 hover:scale-95 ${button.hoverColor} ${button.hoverTextColor} hover:shadow-lg`}
             >
               {button.text}
             </Link>
