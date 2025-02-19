@@ -15,12 +15,12 @@ const Connexion = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formData = {
-      username,
-      mot_de_passe: MotDePasse,
-    };
+    // const formData = {
+    //   username,
+    //   mot_de_passe: MotDePasse,
+    // };
 
-    console.log("Data being sent to backend:", formData);
+    // console.log("Data being sent to backend:", formData);
 
     // Simulate login API call
     try {
@@ -32,7 +32,7 @@ const Connexion = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username, MotDePasse }),
+          body: JSON.stringify({ username, mot_de_passe: MotDePasse }),
         }
       );
 
