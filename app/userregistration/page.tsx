@@ -24,20 +24,21 @@ const Inscription = () => {
       return;
     }
     // Log the data before sending the request
-    // const formData = {
-    //   username,
-    //   nom,
-    //   prenom,
-    //   NumeroTelephone,
-    //   MotDePasse,
-    // };
+    const formData = {
+      username,
+      nom,
+      prenom,
+      NumeroTelephone,
+      MotDePasse,
+    };
 
-    // console.log("Data being sent to backend:", formData);
+    console.log("Data being sent to backend:", formData);
 
     // Simulate registration API call
     try {
       const response = await fetch(
-        "https://fermeclement.site/api/userregister",
+        // "https://fermeclement.site/api/userregister",
+        "http://192.168.1.8:5050/userregister",
         {
           method: "POST",
           headers: {
@@ -48,7 +49,7 @@ const Inscription = () => {
             nom,
             prenom,
             numero_telephone: NumeroTelephone,
-            MotDePasse,
+            mot_de_passe: MotDePasse,
           }),
         }
       );

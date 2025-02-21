@@ -15,18 +15,18 @@ const Connexion = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // const formData = {
-    //   username,
-    //   mot_de_passe: MotDePasse,
-    // };
+    const formData = {
+      username,
+      mot_de_passe: MotDePasse,
+    };
 
-    // console.log("Data being sent to backend:", formData);
+    console.log("Data being sent to backend:", formData);
 
     // Simulate login API call
     try {
       const response = await fetch(
-        "https://fermeclement.site/api/userlogin",
-        //"http://192.168.1.228:5050/userlogin",
+        //"https://fermeclement.site/api/userlogin",
+        "http://192.168.1.8:5050/userlogin",
         {
           method: "POST",
           headers: {
