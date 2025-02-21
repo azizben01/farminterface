@@ -37,8 +37,8 @@ const Inscription = () => {
     // Simulate registration API call
     try {
       const response = await fetch(
-        // "https://fermeclement.site/api/userregister",
-        "http://192.168.1.8:5050/userregister",
+        "https://fermeclement.site/api/userregister",
+        // "http://192.168.1.8:5050/userregister",
         {
           method: "POST",
           headers: {

@@ -25,8 +25,8 @@ const Connexion = () => {
     // Simulate login API call
     try {
       const response = await fetch(
-        //"https://fermeclement.site/api/userlogin",
-        "http://192.168.1.8:5050/userlogin",
+        "https://fermeclement.site/api/userlogin",
+        //"http://192.168.1.8:5050/userlogin",
         {
           method: "POST",
           headers: {
