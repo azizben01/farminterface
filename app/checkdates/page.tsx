@@ -40,7 +40,7 @@ export default function Checkdates() {
   const router = useRouter();
 
   useEffect(() => {
-    fetch("http://192.168.1.8:5050/geteggincubation")
+    fetch("https://fermeclement.site/api/geteggincubation")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched Data:", data); // Debugging
