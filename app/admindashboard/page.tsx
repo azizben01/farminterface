@@ -152,24 +152,24 @@ const AdminDashboard = () => {
     <main className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
       <button
         onClick={handleBackClick}
-        className="relative mb-4 px-4 py-2 bg-gray-700 text-white rounded-lg shadow hover:bg-gray-800 transition"
+        className="relative mb-4 px-4 py-2 border border-custom-green text-custom-green rounded-lg shadow hover:bg-custom-green hover:text-white transition"
       >
         Retour au menu principal
       </button>
-      <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
+      <h1 className="lg:text-4xl md:text-3xl sm:text-2xl font-bold text-center text-custom-green underline mb-8">
         Tableau de bord administrateur
       </h1>
 
       {/* Filters Section */}
       <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
         <div className="space-y-4">
-          <label className="block text-lg font-medium text-gray-700">
+          <label className="block text-lg text-center text-custom-button font-bold">
             Sélectionnez un formulaire
           </label>
           <select
             value={selectedForm}
             onChange={(e) => setSelectedForm(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            className="w-full p-3 border border-custom-button rounded-lg text-custom-button focus:ring-2 focus:ring-custom-green focus:border-custom-button transition-all"
           >
             <option value="" disabled>
               Choisissez un formulaire
@@ -183,20 +183,20 @@ const AdminDashboard = () => {
         </div>
 
         <div className="mt-6 space-y-4">
-          <label className="block text-lg font-medium text-gray-700">
+          <label className="block text-lg font-medium text-custom-button">
             Sélectionnez une période
           </label>
           <div className="flex flex-col sm:flex-row gap-4">
             <DatePicker
               selected={startDate}
               onChange={(date) => setStartDate(date)}
-              className="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+              className="w-full p-3 border border-custom-button rounded-lg text-custom-button transition-all"
               placeholderText="Date de début"
             />
             <DatePicker
               selected={endDate}
               onChange={(date) => setEndDate(date)}
-              className="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+              className="w-full p-3 border border-custom-button rounded-lg text-custom-button transition-all"
               placeholderText="Date de fin"
             />
           </div>
@@ -205,11 +205,11 @@ const AdminDashboard = () => {
 
       {/* Data Display Section */}
       {loading ? (
-        <div className="text-center text-gray-600">
+        <div className="text-center text-custom-green">
           Chargement des données...
         </div>
       ) : data.length === 0 ? (
-        <div className="col-span-full bg-white p-6 rounded-xl shadow-sm text-center text-gray-500 text-lg">
+        <div className="col-span-full bg-white p-6 rounded-xl shadow-sm text-center text-custom-button text-lg">
           Aucun enregistrement trouvé.
         </div>
       ) : (
@@ -217,16 +217,16 @@ const AdminDashboard = () => {
           {data.map((item) => (
             <div
               key={`card-${item.id}`}
-              className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow border-l-4 border-blue-500"
+              className="bg-white p-6 rounded-xl shadow-sm hover:shadow-2xl transition-shadow border-l-3 border-custom-button"
             >
               <div className="space-y-4">
                 {columns.map((col, colIndex) => (
                   <div
                     key={`card-${item.id}-${colIndex}`}
-                    className="space-y-1"
+                    className="flex items-center"
                   >
-                    <p className="text-sm font-medium text-gray-500 uppercase">
-                      {col}
+                    <p className="text-sm font-medium text-gray-800 pr-4 uppercase">
+                      {col}:
                     </p>
                     <p className="text-lg font-semibold text-custom-green">
                       {item[col]}

@@ -83,7 +83,8 @@ const Incubation = () => {
     };
     try {
       const response = await fetch(
-        "https://fermeclement.site/api/eggincubation",
+        //"https://fermeclement.site/api/eggincubation",
+        "http://192.168.1.8:5050/eggincubation",
         {
           method: "POST",
           headers: {

@@ -80,7 +80,7 @@ const Inscription = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
 
       {/* Content */}
-      <div className="relative bg-gray-100 bg-opacity-50 rounded-xl shadow-xl flex flex-col items-center justify-center w-11/12 sm:w-[600px] md:w-[700px] lg:w-[700px] xl:w-[800px] p-6 sm:p-8 md:p-10 lg:p-12">
+      <div className="relative bg-white bg-opacity-60 rounded-xl shadow-xl flex flex-col items-center justify-center w-11/12 sm:w-[600px] md:w-[700px] lg:w-[700px] xl:w-[800px] p-6 sm:p-8 md:p-10 lg:p-12">
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-extrabold text-custom-button">
           Fiche D&apos;inscription
         </h1>

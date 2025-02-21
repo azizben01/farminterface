@@ -17,30 +17,46 @@ interface IncubationOeufs {
   date_creation: string;
 }
 
+// Function to properly format the date while keeping "DD-MM-YYYY HH:MM:SS"
+const formatDate = (dateStr: string) => {
+  if (!dateStr) return "Invalid Date"; // Handle empty/null values
+
+  // Split date and time
+  const [day, month, yearTime] = dateStr.split("-");
+  const [year, time] = yearTime.split(" ");
+
+  // Create a valid Date object
+  const dateObj = new Date(`${year}-${month}-${day}T${time}`);
+
+  if (isNaN(dateObj.getTime())) return "Invalid Date"; // Ensure date is valid
+
+  // Return the original format: "DD-MM-YYYY HH:MM:SS"
+  return `${day}-${month}-${year}`;
+};
+
 export default function Checkdates() {
   const [data, setData] = useState<IncubationOeufs[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    fetch("https://fermeclement.site/api/geteggincubation") // Replace with your API endpoint
+    fetch("http://192.168.1.8:5050/geteggincubation")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched Data:", data); // Debugging
-        // const currentDate = new Date();
         console.log("Current Date:", new Date().toISOString());
 
-        // Check if data is an object instead of an array
+        // Ensure we handle data properly
         const records = Array.isArray(data) ? data : data.records;
 
         if (!Array.isArray(records)) {
           console.error("Unexpected data format:", data);
-          setLoading(false); // Ensure loading is set to false
+          setLoading(false);
           return;
         }
 
-        // Filter out records where date_eclosion has passed
-        const filteredData = data.filter((item: IncubationOeufs) => {
+        // Filter out past records
+        const filteredData = records.filter((item: IncubationOeufs) => {
           const [day, month, yearTime] = item.date_eclosion.split("-");
           const [year, time] = yearTime.split(" ");
           const formattedDate = new Date(`${year}-${month}-${day}T${time}`);
@@ -53,7 +69,7 @@ export default function Checkdates() {
         console.error("Error fetching data:", error);
       })
       .finally(() => {
-        setLoading(false); // Ensure loading is set to false regardless of success or failure
+        setLoading(false);
       });
   }, []);
 
@@ -69,8 +85,8 @@ export default function Checkdates() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-4xl font-bold text-center text-custom-button mb-6">
-        Suivit des dates d&apos;incubation des Œufs
+      <h1 className="text-4xl underline font-bold text-center text-custom-button mb-6">
+        Suivi des dates d&apos;incubation des Œufs
       </h1>
       <button
         onClick={handleBackClick}
@@ -87,59 +103,31 @@ export default function Checkdates() {
           {data.map((record) => (
             <div
               key={record.id}
-              className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-transform transform hover:scale-105"
+              className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition-transform transform hover:scale-105"
             >
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
+              <h2 className="text-2xl text-center underline text-custom-green font-semibold">
                 Espèces: {record.espece}
               </h2>
-              <p className="text-lg text-black">
-                Cette fiche a été créée le:{" "}
-                {new Date(record.date_creation).toLocaleDateString()}
-              </p>{" "}
-              <br />
-              <p className="text-sm text-custom-red">
-                Considérer les dates suivantes à venir :
-              </p>
-              <div className="mt-4 text-sm text-gray-700">
-                {/* <p>
-                  Date d&apos;incubation:{" "}
-                  {new Date(record.date_incubation).toLocaleDateString()}
-                </p> */}
+
+              <div className="mt-4 text-lg text-black font-bold">
                 <br />
-                {/* <p>
-                  Date de Mirage:{" "}
-                  {new Date(record.date_mirage).toLocaleDateString()}
-                </p> */}
-                <p>
-                  Date de Mirage:{" "}
-                  {(() => {
-                    const [day, month, yearTime] =
-                      record.date_mirage.split("-");
-                    if (!yearTime) return "Date invalide"; // Prevent error if format is wrong
-
-                    const [year, time] = yearTime.split(" ");
-                    const formattedDate = new Date(
-                      `${year}-${month}-${day}T${time}`
-                    );
-
-                    return isNaN(formattedDate.getTime())
-                      ? "Date invalide"
-                      : formattedDate.toLocaleDateString();
-                  })()}
-                </p>
-
+                <p className="text-lg font-bold text-custom-green">
+                  Considérer les dates suivantes à venir :
+                </p>{" "}
+                <br />
+                <p className="m">
+                  Date de mise en incubation: {formatDate(record.date_creation)}
+                </p>{" "}
+                <br />
+                <p>Date de Mirage: {formatDate(record.date_mirage)}</p>
                 <br />
                 <p>
-                  Date de mise en éclosoir:{" "}
-                  {new Date(record.mise_en_closoir).toLocaleDateString()}
+                  Date de mise en éclosoir: {formatDate(record.mise_en_closoir)}
                 </p>
                 <br />
-                <p>
-                  Date d&apos;éclosion:{" "}
-                  {new Date(record.date_eclosion).toLocaleDateString()}
-                </p>
+                <p>Date d&apos;éclosion: {formatDate(record.date_eclosion)}</p>
                 <br />
-                <p>Lot numero: {record.id}</p>
+                <p>Lot numéro: {record.id}</p>
                 <br />
               </div>
             </div>
