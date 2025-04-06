@@ -1,6 +1,4 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# Dependency directories
 /node_modules
 /.pnp
 .pnp.*
@@ -9,32 +7,79 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+/.yarn/cache
+/.yarn/unplugged
+/.yarn/build-state.yml
+/.yarn/install-state.gz
+.pnpm-debug.log
 
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
+# Build and cache directories
+/.next
+/out
 /build
+/.cache
+/.turbo
 
-# misc
-.DS_Store
-*.pem
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env*.local
 
-# debug
+# Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+*.temp
+*~
+~$*
 
-# vercel
-.vercel
+# IDE specific
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# typescript
+# TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Vercel/Deployment
+.vercel
+.next/cache
+
+# Testing
+/coverage
+.nyc_output
+
+# Logs
+logs
+*.log
+
+# Local development
+.tmp
+.dist
+
+# Misc
+*.pem
+*.cer
+*.crt
+*.key
+*.csr
+*.der
+*.pfx
+*.p12

@@ -1,25 +1,30 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { GiDeadHead } from "react-icons/gi";
-import { TbEggs } from "react-icons/tb";
 
 type FormData = {
+  nom_du_client: string;
+  type_oeufs: string;
   nombre_de_plateaux: string | number;
   prix_unitaire: string | number;
   Montant: string | number;
   montant_recu: string | number;
   montant_restant: string | number;
+  montant_rembourse: string | number;
   Description: string;
 };
+
 export default function VentesDesOeufs() {
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
+    nom_du_client: "",
+    type_oeufs: "",
     nombre_de_plateaux: "",
     prix_unitaire: "",
     Montant: "",
     montant_recu: "",
     montant_restant: "",
+    montant_rembourse: "",
     Description: "",
   });
   const handleInputChange = (
@@ -30,7 +35,14 @@ export default function VentesDesOeufs() {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: name === "Description" ? value : value ? parseInt(value, 10) : "",
+      [name]:
+        name === "nom_du_client" ||
+        name === "type_oeufs" ||
+        name === "Description"
+          ? value
+          : value
+          ? parseInt(value, 10)
+          : "",
     }));
     // Set custom validation message in French
     if (event.target.validity.valueMissing) {
@@ -48,6 +60,8 @@ export default function VentesDesOeufs() {
     // prepare all data, ensuring all numeric values are integers
     const dataToSend = {
       ...formData,
+      nom_du_client: formData.nom_du_client,
+      type_oeufs: formData.type_oeufs,
       nombre_de_plateaux:
         formData.nombre_de_plateaux === ""
           ? null
@@ -66,9 +80,14 @@ export default function VentesDesOeufs() {
         formData.montant_restant === ""
           ? null
           : parseInt(formData.montant_restant as string),
+      montant_rembourse:
+        formData.montant_rembourse === ""
+          ? null
+          : parseInt(formData.montant_rembourse as string),
     };
     try {
       const response = await fetch("https://fermeclement.site/api/eggsales", {
+        // const response = await fetch("http://192.168.1.8:5050/eggsales", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -78,11 +97,14 @@ export default function VentesDesOeufs() {
       if (response.ok) {
         alert("La fiche a bien ete envoyee!");
         setFormData({
+          nom_du_client: "",
+          type_oeufs: "",
           nombre_de_plateaux: "",
           prix_unitaire: "",
           Montant: "",
           montant_recu: "",
           montant_restant: "",
+          montant_rembourse: "",
           Description: "",
         });
         router.push("/chooseform");
@@ -104,135 +126,165 @@ export default function VentesDesOeufs() {
   };
 
   return (
-    <div className="h-full flex justify-center items-center p-1">
+    <div className="min-h-screen flex flex-col justify-center items-center p-4 bg-gray-100 relative">
+      {/* Background Image - Now Covers Full Height */}
       <div
-        className="absolute inset-0 bg-cover bg-center md:bg-fixed"
+        className="absolute inset-0 bg-cover bg-center md:bg-fixed h-full w-full"
         style={{ backgroundImage: "url('/images/eggtable.jpg')" }}
       />
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
-      <div className="relative bg-white p-4 rounded-lg shadow-lg max-w-2xl w-full h-full">
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black opacity-50" />
+
+      {/* Form Container */}
+      <div className="relative bg-white p-6 rounded-xl shadow-lg max-w-4xl w-full md:max-h-[85vh] overflow-y-auto">
         <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-          Fiche recapitulatif de la vente des oeufs.
+          Fiche récapitulative de la vente des œufs
         </h1>
-        <p className="text-center text-md text-black mb-8">
-          Remplissez cette fiche pour enregister la vente des oeufs de table.
+        <p className="text-center text-md text-gray-600 mb-6">
+          Remplissez cette fiche pour enregistrer la vente des œufs de table.
         </p>
 
-        {/* Service Request Form */}
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="relative mt-1">
-            <p className="ml-2 text-black">Nombre de plateaux</p>
-            <TbEggs className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          {/* Nom du client */}
+          <div>
+            <p className="text-black">Nom du client</p>
+            <input
+              type="text"
+              name="nom_du_client"
+              value={formData.nom_du_client}
+              onChange={handleInputChange}
+              placeholder="Nom du client"
+              required
+              className="w-full text-gray-800 px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-gray-800"
+            />
+          </div>
+
+          {/* Type d'œufs */}
+          <div>
+            <p className="text-black">Type d&apos;œufs</p>
+            <select
+              name="type_oeufs"
+              value={formData.type_oeufs}
+              onChange={handleInputChange}
+              required
+              className="w-full px-4 text-gray-800 py-2 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-gray-800"
+            >
+              <option value="">Sélectionnez un type</option>
+              <option value="Goliath">Goliath</option>
+              <option value="Pintade">Pintade</option>
+              <option value="Caille">Caille</option>
+              <option value="Canard">Canard</option>
+            </select>
+          </div>
+
+          {/* Nombre de plateaux & Prix unitaire */}
+          <div>
+            <p className="text-black">Nombre de plateaux</p>
             <input
               type="number"
-              id="Nombedeplateaux"
               name="nombre_de_plateaux"
               value={formData.nombre_de_plateaux}
               onChange={handleInputChange}
-              placeholder={"Nombre de plateaux"}
+              placeholder="Nombre de plateaux"
               required
-              onInvalid={(e) => {
-                setFrenchValidationMessage(e.currentTarget);
-              }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
-            />
-          </div>
-
-          <div className="relative mt-1">
-            <p className="ml-2 text-black">Prix Unitaire</p>
-            <GiDeadHead className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
-            <input
-              type="number"
-              id="PrixUnitaire"
-              name="prix_unitaire"
-              value={formData.prix_unitaire}
-              onChange={handleInputChange}
-              placeholder={"Prix unitaire"}
-              required
-              onInvalid={(e) => {
-                setFrenchValidationMessage(e.currentTarget);
-              }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
-            />
-          </div>
-          <div className="relative mt-1">
-            <p className="ml-2 text-black">Montant total</p>
-            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
-            <input
-              type="number"
-              id="Montant"
-              name="Montant"
-              value={formData.Montant}
-              onChange={handleInputChange}
-              placeholder={"Montant total"}
-              required
-              onInvalid={(e) => {
-                setFrenchValidationMessage(e.currentTarget);
-              }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
-            />
-          </div>
-          <div className="relative mt-1">
-            <p className="ml-2 text-black">Montant récupéré</p>
-            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
-            <input
-              type="number"
-              id="MontantRecu"
-              name="montant_recu"
-              value={formData.montant_recu}
-              onChange={handleInputChange}
-              placeholder={"Montant récupéré"}
-              required
-              onInvalid={(e) => {
-                setFrenchValidationMessage(e.currentTarget);
-              }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
-            />
-          </div>
-          <div className="relative mt-1">
-            <p className="ml-2 text-black">Reste a encaisser</p>
-            <TbEggs className="absolute top-[45px] left-3 transform -translate-y-1/2 text-gray-900" />
-            <input
-              type="number"
-              id="MontantRestant"
-              name="montant_restant"
-              value={formData.montant_restant}
-              onChange={handleInputChange}
-              placeholder={"Reste a encaisser"}
-              required
-              onInvalid={(e) => {
-                setFrenchValidationMessage(e.currentTarget);
-              }}
-              className="bg-white text-gray-900 bg-opacity-80 pl-10 border border-gray-300 w-full px-4 py-2 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              className="w-full px-4 py-2 text-gray-800 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-gray-800"
             />
           </div>
 
           <div>
-            <p className="ml-2 text-black">
-              Ajouter un commentaire par rapport a la vente
-            </p>
+            <p className="text-black">Prix Unitaire</p>
+            <input
+              type="number"
+              name="prix_unitaire"
+              value={formData.prix_unitaire}
+              onChange={handleInputChange}
+              placeholder="Prix unitaire"
+              required
+              className="w-full px-4 py-2 text-gray-800 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-gray-800"
+            />
+          </div>
+
+          {/* Montant total & Montant récupéré */}
+          <div>
+            <p className="text-black">Montant total</p>
+            <input
+              type="number"
+              name="Montant"
+              value={formData.Montant}
+              onChange={handleInputChange}
+              placeholder="Montant total"
+              required
+              className="w-full px-4 py-2 text-gray-800 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-gray-800"
+            />
+          </div>
+
+          <div>
+            <p className="text-black">Montant récupéré</p>
+            <input
+              type="number"
+              name="montant_recu"
+              value={formData.montant_recu}
+              onChange={handleInputChange}
+              placeholder="Montant récupéré"
+              required
+              className="w-full px-4 py-2 text-gray-800 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-gray-800"
+            />
+          </div>
+
+          {/* Reste à récupérer & Montant remboursé */}
+          <div>
+            <p className="text-black">Reste à récupérer</p>
+            <input
+              type="number"
+              name="montant_restant"
+              value={formData.montant_restant}
+              onChange={handleInputChange}
+              placeholder="Reste à encaisser"
+              required
+              className="w-full px-4 py-2 text-gray-800 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-gray-800"
+            />
+          </div>
+
+          <div>
+            <p className="text-black">Montant remboursé après</p>
+            <input
+              type="number"
+              name="montant_rembourse"
+              value={formData.montant_rembourse}
+              onChange={handleInputChange}
+              placeholder="Montant remboursé"
+              required
+              className="w-full px-4 py-2 text-gray-800 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-gray-800"
+            />
+          </div>
+
+          {/* Commentaire */}
+          <div className="md:col-span-2">
+            <p className="text-black">Ajouter un commentaire si besoin</p>
             <textarea
-              id="Description"
               name="Description"
               value={formData.Description}
               onChange={handleInputChange}
-              required
-              onInvalid={(e) => {
-                setFrenchValidationMessage(e.currentTarget);
-              }}
               rows={2}
-              className="bg-white text-gray-900 bg-opacity-80 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
-              placeholder={"Ajouter un commentaire par rapport a la vente"}
+              className="w-full px-4 py-2 text-gray-800 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-gray-800"
+              placeholder="Ajoutez un commentaire..."
             />
           </div>
-          <button
-            type="submit"
-            className="w-full bg-custom-green text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-custom-button hover:text-white hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
-          >
-            Enregister
-          </button>
+
+          {/* Submit Button */}
+          <div className="md:col-span-2">
+            <button
+              type="submit"
+              className="w-full bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-green-700 hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+            >
+              Enregistrer
+            </button>
+          </div>
         </form>
       </div>
     </div>

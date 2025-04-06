@@ -9,7 +9,10 @@ type FormData = {
   Prix_Unitaire: number | string;
   Montant_Total: number | string;
   Description: string;
+  Type_Achat: string;
+  Autre_Type_Achat: string;
 };
+
 const Besoins = () => {
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
@@ -17,6 +20,8 @@ const Besoins = () => {
     Prix_Unitaire: "",
     Montant_Total: "",
     Description: "",
+    Type_Achat: "",
+    Autre_Type_Achat: "",
   });
 
   const handleInputChange = (
@@ -27,7 +32,14 @@ const Besoins = () => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: name === "Description" ? value : value ? parseInt(value, 10) : "",
+      [name]:
+        name === "Description" ||
+        name === "Type_Achat" ||
+        name === "Autre_Type_Achat"
+          ? value
+          : value
+          ? parseInt(value, 10)
+          : "",
     }));
     // Set custom validation message in French
     if (event.target.validity.valueMissing) {
@@ -55,13 +67,17 @@ const Besoins = () => {
     };
 
     try {
-      const response = await fetch("https://fermeclement.site/api/farmneeds", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const response = await fetch(
+        "https://fermeclement.site/api/farmneeds",
+        //  "http://192.168.1.8:5050/farmneeds",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
       if (response.ok) {
         alert("La fiche a bien ete envoyee!");
         setFormData({
@@ -69,6 +85,8 @@ const Besoins = () => {
           Prix_Unitaire: "",
           Montant_Total: "",
           Description: "",
+          Type_Achat: "",
+          Autre_Type_Achat: "",
         });
         router.push("/chooseform");
         console.log("la forme:", formData);
@@ -101,15 +119,70 @@ const Besoins = () => {
 
       <div className="relative bg-white p-5 rounded-lg shadow-lg max-w-2xl w-full max-h-lg h-full">
         <h1 className="text-3xl font-bold text-gray-800 mb-3 text-center">
-          Besoins de la ferme.
+          Achats de la ferme
         </h1>
         <p className="text-center text-black mb-5">
-          Remplissez cette fiche en indiquant les besoins necessaires de la
-          ferme.
+          Remplissez cette fiche en indiquant les achats de la ferme
+          necessaires.
         </p>
 
         {/* Service Request Form */}
         <form onSubmit={handleSubmit} className="space-y-3">
+          {/* Type d'achat */}
+          <div className="relative mt-1">
+            <p className="ml-2 text-black">Type d&apos;achat</p>
+            <select
+              id="TypeAchat"
+              name="Type_Achat"
+              value={formData.Type_Achat}
+              onChange={handleInputChange}
+              required
+              onInvalid={(e) => {
+                const target = e.currentTarget;
+                if (
+                  target instanceof HTMLInputElement ||
+                  target instanceof HTMLTextAreaElement
+                ) {
+                  setFrenchValidationMessage(target);
+                } else {
+                  target.setCustomValidity("Veuillez sélectionner une option.");
+                }
+              }}
+              onInput={(e) => e.currentTarget.setCustomValidity("")} // Reset validation on input change
+              className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+            >
+              <option value="">Sélectionnez le type d&apos;achat</option>
+              <option value="Provende">Provende</option>
+              <option value="Produits vétérinaires">
+                Produits vétérinaires
+              </option>
+              <option value="Petits matériels">Petits matériels</option>
+              <option value="Carburant">Carburant</option>
+              <option value="Electricité">Electricité</option>
+              <option value="Autres">Autres (à préciser)</option>
+            </select>
+          </div>
+
+          {/* Conditional input for "Autres" */}
+          {formData.Type_Achat === "Autres" && (
+            <div className="relative mt-1">
+              <p className="ml-2 text-black">Précisez le type d&apos;achat</p>
+              <input
+                type="text"
+                id="AutreTypeAchat"
+                name="Autre_Type_Achat"
+                value={formData.Autre_Type_Achat}
+                onChange={handleInputChange}
+                placeholder="Précisez le type d'achat"
+                required
+                onInvalid={(e) => {
+                  setFrenchValidationMessage(e.currentTarget);
+                }}
+                className="bg-white text-gray-900 bg-opacity-80 pl-10 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-800"
+              />
+            </div>
+          )}
+
           <div className="relative mt-1">
             <p className="ml-2 text-black">Quantité</p>
             <GoNumber className="absolute top-[48px] left-3 transform -translate-y-1/2 text-gray-900" />
@@ -165,16 +238,13 @@ const Besoins = () => {
           </div>
 
           <div>
-            <p className="ml-2 text-black">
-              Vous devez décrire le besoin d&apos;achat
-            </p>
+            <p className="ml-2 text-black">Entrer un commentaire si besoin.</p>
             <textarea
               id="Description"
               name="Description"
               value={formData.Description}
               onChange={handleInputChange}
               rows={2}
-              required
               onInvalid={(e) => {
                 setFrenchValidationMessage(e.currentTarget);
               }}
@@ -182,7 +252,6 @@ const Besoins = () => {
               placeholder={"Description"}
             />
           </div>
-
           <button
             type="submit"
             className="w-full bg-custom-green text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-custom-button hover:text-white hover:scale-105 transition-transform duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"

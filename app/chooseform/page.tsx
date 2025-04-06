@@ -56,7 +56,7 @@ const Chooseform = () => {
             },
             {
               href: "/besoins",
-              text: "Les besoins de la ferme",
+              text: "Achats de la ferme",
               bgColor: "bg-white",
               hoverColor: "hover:bg-custom-green",
               textColor: "text-custom-green",
