@@ -25,7 +25,7 @@ const Accueil = () => {
               />
             </div>
             <h1 className="text-2xl md:text-3xl font-bold text-white text-center">
-              Ferme D'élevage <br />
+              Ferme D&apos;élevage <br />
               de Monsieur Clément
             </h1>
           </div>
