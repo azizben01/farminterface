@@ -1,43 +1,57 @@
-// pages/accueil.tsx
 import Link from "next/link";
+import Image from "next/image";
 
 const Accueil = () => {
   return (
-    <main className="h-screen container mx-auto p-4 text-center flex flex-col justify-center items-center">
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center md:bg-fixed"
-        style={{ backgroundImage: "url('/images/trees.jpg')" }}
-      />
-
+    <main className="min-h-screen flex items-center justify-center bg-gray-50">
+      {/* Background with farm/agriculture image */}
+      <div className="absolute inset-0 bg-[url('/images/trees.jpg')] bg-cover bg-center" />
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black opacity-70" />
 
-      {/* Content */}
-      <div className="relative space-y-6 bg-white bg-opacity-70 rounded-xl shadow-xl flex flex-col items-center justify-center w-11/12 sm:w-[600px] md:w-[700px] lg:w-[700px] xl:w-[800px] p-6 sm:p-8 md:p-10 lg:p-12">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-custom-button sm:pb-10 md:pb-10 lg:pb-10 xl:pb-10">
-          Bienvenue dans la ferme D&apos;élevage de Monsieur Clément
-        </h1>
-        <div className="flex flex-col w-full gap-4">
-          <Link
-            href="/userregistration"
-            className="bg-white text-custom-button px-5 py-1 font-bold rounded-2xl text-lg sm:text-lg md:text-lg lg:text-xl hover:bg-custom-button hover:text-white transition duration-300"
-          >
-            S&apos;inscrire
-          </Link>
+      {/* Main card container */}
+      <div className="relative w-full max-w-4xl mx-4 bg-white rounded-2xl shadow-2xl overflow-hidden">
+        {/* Split layout with color block */}
+        <div className="flex flex-col md:flex-row">
+          {/* Left side - Branding section */}
+          <div className="w-full md:w-2/5 bg-custom-button p-8 flex flex-col items-center justify-center">
+            <div className="mb-6 w-48 h-48 relative">
+              <Image
+                src="/images/logo.png"
+                alt="Ferme D'élevage de Monsieur Clément"
+                fill
+                className="object-contain drop-shadow-lg"
+                priority
+              />
+            </div>
+            <h1 className="text-2xl md:text-3xl font-bold text-white text-center">
+              Ferme D'élevage <br />
+              de Monsieur Clément
+            </h1>
+          </div>
 
-          <Link
-            href="/userlogin"
-            className="bg-white text-custom-button px-5 py-1 font-bold rounded-2xl text-lg sm:text-lg md:text-lg lg:text-xl hover:bg-custom-button hover:text-white transition duration-300"
-          >
-            Se connecter
-          </Link>
-          <Link
-            href="/adminlogin"
-            className="bg-white text-custom-button px-4 py-1 rounded-2xl font-bold text-base sm:text-lg md:text-lg lg:text-xl hover:bg-custom-green hover:text-white focus:ring-2 focus:ring-custom-button focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105 shadow-lg text-center"
-          >
-            Se connecter comme Administrateur
-          </Link>
+          {/* Right side - Content section */}
+          <div className="w-full md:w-3/5 p-8 md:p-12 flex flex-col justify-center">
+            <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">
+              Bienvenue sur notre plateforme
+            </h2>
+
+            <div className="space-y-4">
+              <Link
+                href="/userlogin"
+                className="block w-full bg-custom-button hover:bg-custom-button-dark text-white font-semibold py-3 px-6 rounded-lg transition duration-300 text-center shadow-md hover:shadow-lg"
+              >
+                Se connecter
+              </Link>
+
+              <Link
+                href="/adminlogin"
+                className="block w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-300 text-center shadow-md hover:shadow-lg"
+              >
+                Espace Administrateur
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </main>

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import {
   FaArrowLeft,
   FaBoxOpen,
@@ -19,6 +21,7 @@ import {
   FiChevronLeft,
   FiChevronRight,
 } from "react-icons/fi";
+import * as XLSX from "xlsx";
 
 interface DataItem {
   id: number;
@@ -187,30 +190,29 @@ const AdminDashboard = () => {
       return;
     }
 
-    // Create CSV content
+    // Get headers from the form configuration
     const headers = formConfig[selectedForm]?.columns || [];
-    const csvContent = [
-      headers.join(","), // CSV header row
-      ...data.map((item) =>
-        headers.map((header) => item[header] || "").join(",")
-      ),
-    ].join("\n");
 
-    // Create a blob and download link
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.setAttribute("href", url);
-    link.setAttribute(
-      "download",
+    // Create worksheet data
+    const worksheetData = [
+      headers, // Header row
+      ...data.map((item) => headers.map((header) => item[header] || "")), // Data rows
+    ];
+
+    // Create a new workbook and worksheet
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+
+    // Add the worksheet to the workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
+
+    // Generate Excel file and trigger download
+    XLSX.writeFile(
+      workbook,
       `${selectedForm.replace(/\s+/g, "_")}_${
         new Date().toISOString().split("T")[0]
-      }.csv`
+      }.xlsx`
     );
-    link.style.visibility = "hidden";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
   };
 
   // const handleRefresh = () => {
@@ -259,9 +261,18 @@ const AdminDashboard = () => {
               <FaArrowLeft className="w-4 h-4" />
               Retour au menu principal
             </button>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-custom-green">
-              Tableau de bord administrateur
-            </h1>
+            <div className="flex items-center gap-4">
+              <Image
+                src="/images/logo.png"
+                alt="Farm Logo"
+                width={100}
+                height={100}
+                className="rounded-lg"
+              />
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-custom-green">
+                Tableau de bord administrateur
+              </h1>
+            </div>
           </div>
           <div className="flex gap-3">
             <button
@@ -278,6 +289,12 @@ const AdminDashboard = () => {
               <FaSync className="w-4 h-4" />
               Actualiser
             </button> */}
+            <Link
+              href="/userregistration"
+              className="block w-full bg-custom-button hover:bg-custom-button-dark text-white font-semibold py-3 px-6 rounded-lg transition duration-300 text-center shadow-md hover:shadow-lg"
+            >
+              Inscrire un membre
+            </Link>
           </div>
         </div>
 
